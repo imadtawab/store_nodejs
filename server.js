@@ -16,7 +16,7 @@ app.set("views","views")
 const mongoose = require("mongoose")
 const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
 const URL_DB_LOCAL = "mongodb://localhost:27017"
-mongoose.connect(URL_DB_LOCAL,{useNewUrlParser:true,useUnifiedTopology:true}).then((result) => {
+mongoose.connect(URL_DB,{useNewUrlParser:true,useUnifiedTopology:true}).then((result) => {
     console.log("connect !!")
 }).catch(err => console.log(err))
 
