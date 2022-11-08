@@ -1,0 +1,220 @@
+<%- include("./partials/adminPartials/top.ejs") %> 
+           
+            
+                 <!-- Start Content -->
+                <h1>New Product</h1>
+                <form enctype="multipart/form-data" action="/admin/addnewproduct" method="POST">
+                    <div class="widget product-info-widget">
+                        <h3 class="top-title">Information</h3>
+                        <div class="box">
+                            <label for="type">Type :</label>
+                            <select name="type" id="type">
+                                <option value="glasses">Glasses</option>
+                                <option value="shoes">Shoes</option>
+                                <option value="accessories">Accessories</option>
+                                <option value="panties">Panties</option>
+                                <option value="shirts">Shirts</option>
+                            </select>
+                        </div>
+                        <div class="box">
+                            <label for="title">Tilte :</label>
+                            <input type="text" name="title" id="title" required>
+                        </div>
+                        <div class="box">
+                            <label for="description">Description :</label>
+                            <textarea name="description" id="description" required></textarea>
+                        </div>
+                        <div class="box box-price">
+                            <div class="min-box sub_price">
+                                <label for="sub_price">SubPrice :</label>
+                                <input type="number" name="sub_price" id="sub_price" placeholder="Sub Price" required>
+                            </div>
+                            <div class="min-box discount">
+                                <label for="discount">Discount :</label>
+                                <input type="number" name="discount" id="discount" value="0" placeholder="Discount" required>
+                            </div>
+                            <div class="min-box price">
+                                <label for="price">Price :</label>
+                                <input type="number" name="price" id="price"  placeholder="Price" required>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <label for="">Image :</label>
+                            <div class="addImages">
+                                <div class="parent-img">
+                                    <input class="inputImg" type="file" name="images" id="addImage" required>
+                                <label class="labelImg"  for="addImage">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage1">
+                                <label class="labelImg"  for="addImage1">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage2">
+                                <label class="labelImg"  for="addImage2">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage3">
+                                <label class="labelImg"  for="addImage3">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage4">
+                                <label class="labelImg"  for="addImage4">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage5">
+                                <label class="labelImg"  for="addImage5">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage6">
+                                <label class="labelImg"  for="addImage6">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage7">
+                                <label class="labelImg"  for="addImage7">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage8">
+                                <label class="labelImg"  for="addImage8">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage9">
+                                <label class="labelImg"  for="addImage9">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                <div class="parent-img dn">
+                                    <input class="inputImg" type="file" name="images" id="addImage10">
+                                <label class="labelImg"  for="addImage10">
+                                    <i class="close fa-solid fa-close"></i>
+                                </label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="widget shoe-size-widget">
+                            <div class="par-title">
+                                <h3 class="top-title">Shoe Size</h3>
+                                <div class="onOff"></div>
+                            </div>
+                            <div class="props">
+                                <input type="checkbox" name="shoes_size" value="36" id="36">
+                                <label for="36" class="size">36</label>
+                                
+                                <input type="checkbox" name="shoes_size" value="37" id="37">
+                                <label for="37" class="size">37</label>
+                                
+                                <input type="checkbox" name="shoes_size" value="38" id="38">
+                                <label for="38" class="size">38</label>
+                                
+                                <input type="checkbox" name="shoes_size" value="39" id="39">
+                                <label for="39" class="size">39</label>
+                                
+                                <input type="checkbox" name="shoes_size" value="40" id="40">
+                                <label for="40" class="size">40</label>
+                                
+                                <input type="checkbox" name="shoes_size" value="41" id="41">
+                                <label for="41" class="size">41</label>
+                                
+                                <input type="checkbox" name="shoes_size" value="42" id="42">
+                                <label for="42" class="size">42</label>
+
+                                <input type="checkbox" name="shoes_size" value="43" id="43">
+                                <label for="43" class="size">43</label>
+                                
+                                <input type="checkbox" name="shoes_size" value="44" id="44">
+                                <label for="44" class="size">44</label>
+                            </div>
+                        </div>
+                        <div class="widget product-color-widget">
+                            <div class="par-title">
+                                <h3 class="top-title">Product Color</h3>
+                                <div class="onOff"></div>
+                            </div>
+                            <div class="props">
+                                <input type="checkbox" name="colors" value="#9c27b0" style="--color:#9c27b0" class="color" />
+                                <input type="checkbox" name="colors" value="#673ab7" style="--color:#673ab7" class="color" />
+                                <input type="checkbox" name="colors" value="#e91e63" style="--color:#e91e63" class="color" />
+                                <input type="checkbox" name="colors" value="#2196f3" style="--color:#2196f3" class="color" />
+                                <input type="checkbox" name="colors" value="#00bcd4" style="--color:#00bcd4" class="color" />
+                                <input type="checkbox" name="colors" value="#f44336" style="--color:#f44336" class="color" />
+                                <input type="checkbox" name="colors" value="#009688" style="--color:#009688" class="color" />
+                                <input type="checkbox" name="colors" value="#4caf50" style="--color:#4caf50" class="color" />
+                                <input type="checkbox" name="colors" value="#ffeb3b" style="--color:#ffeb3b" class="color" />
+                                <input type="checkbox" name="colors" value="#ff9800" style="--color:#ff9800" class="color" />
+                                <input type="checkbox" name="colors" value="#ff5722" style="--color:#ff5722" class="color" />
+                                <input type="checkbox" name="colors" value="#795548" style="--color:#795548" class="color" />
+                                <input type="checkbox" name="colors" value="#9e9e9e" style="--color:#9e9e9e" class="color" />
+                                <input type="checkbox" name="colors" value="#000" style="--color:#000" class="color" />
+                                <input type="checkbox" name="colors" value="#fff" style="--color:#fff" class="color" data-type="light" />
+                            </div>
+                        
+                        </div>
+                        <div class="widget volume-widget">
+                            <div class="par-title">
+                                <h3 class="top-title">Size</h3>
+                                <div class="onOff"></div>
+                            </div>
+                            <div class="props">
+                                <input type="checkbox" name="clothes_size" value="s" id="s">
+                                <label for="s" class="size">S</label>
+                                <input type="checkbox" name="clothes_size" value="m" id="m">
+                                <label for="m" class="size">M</label>
+                                <input type="checkbox" name="clothes_size" value="l" id="l">
+                                <label for="l" class="size">L</label>
+                                <input type="checkbox" name="clothes_size" value="xl" id="xl">
+                                <label for="xl" class="size">XL</label>
+                                <input type="checkbox" name="clothes_size" value="2xl" id="2xl">
+                                <label for="2xl" class="size">2XL</label>
+                                <input type="checkbox" name="clothes_size" value="3xl" id="3xl">
+                                <label for="3xl" class="size">3XL</label>
+                                <input type="checkbox" name="clothes_size" value="4xl" id="4xl">
+                                <label for="4xl" class="size">4XL</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-form">
+                        <select name="status" class="publish" id="selectStatus">
+                            <option value="publish">Publish</option>
+                            <option value="private">Private</option>
+                        </select>
+                        <div data-modal="add-product" class="add-product-btn">Add Product</div>
+                    </div>
+                    <section id="add-product" style="--modal-color:#33ab73" class="modal">
+                        <div class="popup">
+                            <h3>Add Product</h3>
+                            <div class="content-modal">
+                                Confirm Add New Product
+                            </div>
+                            <div class="footer-modal">
+                                <button class="confirm-btn" type="submit">Confirm</button>
+                                <div class="cancel">Cancel</div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+                
+            <!-- End Content -->
+            
+<%- include("./partials/adminPartials/bottom.ejs") %> 

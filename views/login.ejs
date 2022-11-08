@@ -1,0 +1,21 @@
+<%- include("./partials/adminPartials/login_register_top.ejs") %> 
+<main class="container">
+    <div class="widget">
+      <h3>Login</h3>
+      <% if(msg){ %>
+        <span style="color:#ff0018 " class="show-top-error"><%= msg %></span>
+      <% } %> 
+      <form action="/admin/login" method="POST">
+        <div class="box">
+          <label for="email">Email :</label>
+          <input type="email" value="<%= myuser ? myuser.email : "" %>" name="email" id="email" required />
+        </div>
+        <div class="box">
+          <label for="password">Password :</label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </main>
+<%- include("./partials/adminPartials/login_register_bottom.ejs") %> 

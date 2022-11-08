@@ -1,0 +1,61 @@
+const allProducts = require("../models/addProductSchema")
+const allOrders = require("../models/newOrderSchema")
+
+
+// ##############################
+
+
+
+// ##############################
+
+
+
+const client_home_get = (req,res,next) => {
+    allProducts.find().then((result) => {
+        res.render("home",{pageName:"Home",allProducts:result})
+        if (req.session.visitor) {
+            console.log("eeeeeeeeeee!!!!!!!!!")
+        } else {
+            req.session.visitor = 0
+            console.log(req.session,"aaaaaaaa!!!!")
+        }
+    }).catch(err => console.log(err))
+
+}
+const client_productDetails_get = (req,res) => {
+    allProducts.findById(req.params.id).then((result) => {
+        res.render("productDetailsClient",{pageName:result.title,product:result})
+    }).catch(err => console.log(err))
+}
+
+const client_productDetails_post = (req,res) => {
+    
+    let date = new Date()
+    function checkDate(mydate) {
+        return mydate > 9 ? mydate : "0"+mydate
+    }
+    let addIn = `${checkDate(date.getFullYear())}-${checkDate(date.getMonth() + 1)}-${checkDate(date.getDate())} ${checkDate(date.getHours())}:${checkDate(date.getMinutes())}`
+    allProducts.findById(req.body.productId).then((product) => {
+        new allOrders({
+            product: product,
+            fullName: req.body.fullName,
+            phone: req.body.phone,
+            address: req.body.address,
+            city: req.body.city,
+            shoe_size: req.body.shoes_size,
+            color: req.body.colors,
+            clothe_size: req.body.clothes_size,
+            quantite: req.body.quantite,
+            total: req.body.total,
+            status: [{statue:"pending",in: addIn}],
+            addedIn: addIn
+          }).save().then((result) => {
+            res.redirect(`/${req.body.productId}`)
+          }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+}
+module.exports = {
+    client_home_get,
+    client_productDetails_get,
+    client_productDetails_post
+}

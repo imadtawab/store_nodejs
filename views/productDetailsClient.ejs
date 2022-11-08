@@ -1,0 +1,107 @@
+<%- include("./partials/clientPartials/top.ejs") %> 
+<section class="product-details">
+    <div class="gallery">
+        <div class="main-img">
+            <img src="/uploads/<%= product.images[0] %>" alt="">
+        </div>
+        <div class="all-imgs">
+            <% product.images.forEach((img,index) => { %>
+                <div class="img <%= index == 0 ? "active" : "" %> ">
+                    <img src="/uploads/<%= img %>" alt="" />
+                  </div>
+              <% }) %> 
+        </div>
+        <section class="description">
+            <h6>Description</h6>
+            <p>
+              <%= product.description %> 
+            </p>
+          </section>
+    </div>
+    <form method="POST" action="/<%= product._id %> " class="info">
+        <input type="hidden" name="productId" value="<%= product._id %>"> 
+        <h4><%= product.title %></h4>
+        <div class="product-price">
+            <div class="new-price">Price : <%= product.price %><span>MAD</span></div>
+            <% if(product.sub_price && product.sub_price != "0"){ %>
+                <div class="old-price"><%= product.sub_price %><span>MAD</span></div>
+            <%} %> 
+            
+        </div>
+        <div class="choices">
+            <% if(product.colors.length > 0) { %>
+                <div class="one-choices">
+                    <h6>Colors :</h6>
+                    <div class="colors">
+                        <% product.colors.forEach((color,index) => { %>
+                            <input type="checkbox" name="colors" value="<%= color %>" style="--color:<%= color %>" class="color" <%= index == 0 ? "checked" : "" %> <%= color == "#fff" ? 'data-type=light' : "" %> />
+                        <% }) %> 
+                    </div>
+                </div>
+            <% } %> 
+            <% if(product.clothes_size.length > 0) { %>
+                <div class="one-choices">
+                    <h6>Sizes :</h6>
+                    <div class="top-sizes sizes">
+                        <% product.clothes_size.forEach((size,index) => { %>
+                            <input type="checkbox" name="clothes_size" value="<%= size %>" id="<%= size %>" <%= index == 0 ? "checked" : "" %> >
+                            <label for="<%= size %>" class="size"><%= size %></label>
+                        <% }) %>
+                            
+                    </div>
+                </div>
+            <% } %> 
+            <% if(product.shoes_size.length > 0) { %>
+                <div class="one-choices">
+                    <h6>Shoe size :</h6>
+                    <div class="shoe-sizes sizes">
+                        <% product.shoes_size.forEach((size,index) => { %>
+                        <input type="checkbox" name="shoes_size" value="<%= size %>" id="<%= size %>" <%= index == 0 ? "checked" : "" %> >
+                        <label for="<%= size %>" class="size"><%= size %></label>
+                        <% }) %>
+                    </div>
+                </div>
+            <% } %> 
+        </div>
+        <div class="quantite">
+            <button class="minus">-</button>
+            <input type="number" value="1" name="quantite" readonly="readonly"/> 
+            <button class="plus">+</button>
+        </div>
+        <div class="client-info">
+            <label for="fullName">
+                <div>Full Name <sup>*</sup> :</div>
+                <input type="text" name="fullName" placeholder="Full Name" id="fullName">
+            </label>
+            <label for="phone">
+                <div>Phone <sup>*</sup> :</div>
+                <input type="tel" name="phone" placeholder="Phone" id="phone">
+            </label>
+            <label for="address">
+                <div>Address <sup>*</sup> :</div>
+                <input type="text" name="address" placeholder="Address" id="address">
+            </label>
+            <label for="city">
+                <div>City <sup>*</sup> :</div>
+                <input type="text" name="city" placeholder="City" id="city">
+            </label>
+            <section class="facture">
+                <article id="subTotal" class="sub-total">
+                    <h5>Subtotal :</h5>
+                    <div class="price"><span class="number"><%= product.price %></span><span class="mad">MAD</span></div>
+                </article>
+                <article id="shipping" class="shipping">
+                    <h5>Shipping :</h5>
+                    <div class="price"><span class="number">0</span><span class="mad">MAD</span></div>
+                </article>
+                <article id="total" class="total">
+                    <h5>Total :</h5>
+                    <div class="price"><span class="number">18</span><span class="mad">MAD</span></div>
+                    <input type="hidden" id="topTotal" name="total">
+                </article>
+            </section>
+            <button type="submit">Buy now</button>
+        </div>
+    </form>
+</section>
+<%- include("./partials/clientPartials/bottom.ejs") %> 

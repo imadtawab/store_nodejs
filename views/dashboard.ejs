@@ -1,0 +1,75 @@
+<%- include("./partials/adminPartials/top.ejs") %>
+<h1>Dashbord</h1>
+<div class="new-content">
+  <div class="mywidget statics">
+    <div style="--c: orange" class="widget">
+      <div class="head">
+        <h4>TOTAL ORDER</h4>
+        <i class="fa-solid fa-bag-shopping"></i>
+      </div>
+      <h2 class="number"><%= allOrders.length %></h2>
+    </div>
+    <div style="--c: blue" class="widget">
+      <div class="head">
+        <h4>TOTAL VISITOR</h4>
+        <a href="orderdetails.html">
+          <i class="fa-solid fa-eye"></i>
+        </a>
+      </div>
+      <h2 class="number"><%= visitors %></h2>
+    </div>
+    <div style="--c: red" class="widget">
+      <div class="head">
+        <h4>CONVERSION RATE</h4>
+        <i class="fa-solid fa-percent"></i>
+      </div>
+      <% if(visitors){ %>
+        <% let visitArr = Array.from((allOrders.length / visitors * 100).toString()) %> 
+        <h2 class="number"><%= visitArr.indexOf(".") == -1 ? visitArr.join("") : visitArr.slice(0,visitArr.indexOf(".")+3).join("") %><span>%</span></h2>
+      <% }else{ %>
+        <h2 class="number">0<span>%</span></h2>
+      <% } %> 
+    </div>
+    <div style="--c: green" class="widget">
+      <div class="head">
+        <h4>TOTAL REVENUE</h4>
+        <i class="fa-solid fa-sack-dollar"></i>
+      </div>
+      <% let total = 0 %> 
+      <% allOrders.forEach(order => total += +order.total) %> 
+      <h2 class="number"><%= total %> <span>MAD</span></h2>
+    </div>
+  </div>
+
+  <div class="widget recent-orders">
+    <h4>Recent Orders</h4>
+    <section class="table-container">
+      <table>
+        <tr>
+          <th>Detail</th>
+          <th>Customer</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+        <% for (let i = allOrders.length - 1; i + 1 > 0; i--) { %>
+          <% let order = allOrders[i] %> 
+          <tr>
+            <td class="date"><%=order.addedIn %></td>
+            <td class="customer"><%=order.fullName %></td>
+            <td class="status">
+              <div class="not-select <%= order.status[order.status.length-1].statue %>"><%= order.status[order.status.length-1].statue %></div>
+            </td>
+            <td class="total"><%=order.total %><span>MAD</span></td>
+            <td class="action">
+              <a href="/admin/orders/<%= order._id %> ">
+                <i class="fa-solid fa-eye"></i>
+              </a>
+            </td>
+          </tr>
+          <% } %>
+      </table>
+    </section>
+  </div>
+</div>
+<%- include("./partials/adminPartials/bottom.ejs") %>

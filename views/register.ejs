@@ -1,0 +1,41 @@
+<%- include("./partials/adminPartials/login_register_top.ejs") %> 
+      <main class="container">
+        <div class="widget">
+          <h3>Create Your Account</h3>
+          <% if(msg){ %>
+            <span style="color:#ff0018 " class="show-top-error"><%= msg %></span>
+          <% } %>  
+          <form action="/admin/register" method="POST">
+            <div class="box">
+              <label for="userName">User Name :</label>
+              <div>
+                <input type="text" value="<%= myuser ? myuser.userName : "" %>" name="userName" id="userName" required />
+              </div>
+            </div>
+            <div class="box">
+              <label for="email">Email :</label>
+              <div>
+                <input type="email" value="<%= myuser ? myuser.email : "" %>" name="email" id="email" required />
+              </div>
+              <span class="error dn">"Example@gmail.com"</span>
+            </div>
+            <div class="box">
+              <label for="password">Password :</label>
+              <div>
+                <input type="password" name="password" id="password" required />
+              </div>
+              <span class="error dn">Password must contain uppercase ,lowercase letters and numbers and symbols</span>
+            </div>
+            <div class="box">
+              <label for="confirmPassword">Confirm Password :</label>
+              <div>
+                <input type="password" id="confirmPassword" required/>
+              </div>
+              <span class="error dn">Check Your Password</span>
+            </div>
+
+            <button id="submitBtn" type="submit">Create Account</button>
+          </form>
+        </div>
+      </main>
+ <%- include("./partials/adminPartials/login_register_bottom.ejs") %> 
