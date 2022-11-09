@@ -829,18 +829,18 @@ a {
   flex-wrap: wrap;
 }
 .page .main-content .container .new-content .widget {
+  margin-bottom: 20px;
   padding: 15px;
 }
 .page .main-content .container .new-content .widget h4 {
   margin-bottom: 20px;
 }
-.page .main-content .container .new-content .mywidget {
-  margin-bottom: 20px;
-}
 .page .main-content .container .new-content .statics {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 0;
 }
 .page .main-content .container .new-content .statics .widget {
   padding: 15px 10px 0px;
@@ -893,6 +893,7 @@ a {
 .page .main-content .container .new-content .statics .widget h2.number span {
   color: var(--c);
   font-size: 20px;
+  margin-left: 5px;
 }
 .page .main-content .container .new-content .custom-information {
   flex: 2;

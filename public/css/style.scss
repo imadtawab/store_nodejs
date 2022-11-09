@@ -845,14 +845,14 @@ a{
           flex-wrap:wrap;
         }
         .widget {
-          // margin-bottom: 20px;
+          margin-bottom: 20px;
           padding: 15px;
           h4 {
             margin-bottom: 20px;
           }
         }
         .mywidget {
-          margin-bottom: 20px;
+          // margin-bottom: 20px;
         }
         .statics {
           .widget {
@@ -860,7 +860,8 @@ a{
           }
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: 20px;
+          column-gap: 20px;
+          row-gap: 0;
           .widget {
             min-width: 170px;
             .head {
@@ -907,6 +908,7 @@ a{
               span {
                 color: var(--c);
                 font-size: 20px;
+                margin-left: 5px;
               }
             }
           }

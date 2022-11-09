@@ -6,7 +6,7 @@ const path = require("path")
 const adminRoute = require("./routers/adminRouter/adminRouter")
 const clientRoute = require("./routers/clientRouter/clientRouter")
 // .env
-require("dotenv")
+require('dotenv').config()
 // helmet
 const helmet = require("helmet");
 // ejs
@@ -14,10 +14,11 @@ app.set("view engine","ejs")
 app.set("views","views")
 // mongoose
 const mongoose = require("mongoose")
-const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
-const URL_DB_LOCAL = "mongodb://localhost:27017"
-mongoose.connect(URL_DB,{useNewUrlParser:true,useUnifiedTopology:true}).then((result) => {
+// const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
+// const URL_DB_LOCAL = "mongodb://localhost:27017"
+mongoose.connect(process.env.URL_DB,{useNewUrlParser:true,useUnifiedTopology:true}).then((result) => {
     console.log("connect !!")
+    // console.log(process.env.URL_DB) // remove this after you've confirmed it is working
 }).catch(err => console.log(err))
 
 // 
