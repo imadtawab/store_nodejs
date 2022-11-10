@@ -131,27 +131,23 @@ a {
 }
 .table-container {
   overflow: auto;
-  table,
-  .table {
+  table {
     width: 100%;
     text-align: center;
 
-    tr,
-    .tr {
+    tr {
       height: 50px;
       border: 2px solid #5e5e5e42;
       border-top: none;
       &:nth-child(odd) {
         background-color: #eee;
       }
-      th,
-      .th {
+      th {
         background: #5e5e5e;
         color: #fff;
         border: 2px solid #5e5e5e;
       }
-      td,
-      .td {
+      td {
         padding: 4px 8px;
         &.date {
           font-weight: 600;
