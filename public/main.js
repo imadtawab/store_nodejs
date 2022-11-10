@@ -167,8 +167,12 @@ let aa
 onOff.forEach((item) => {
     item.onclick = (eo) => {
         eo.target.classList.toggle("on")
-        eo.target.parentElement.parentElement
-        .querySelector(".props").classList.toggle("dn")
+        eo.target.parentElement.parentElement.classList.toggle("active")
+        if (!eo.target.parentElement.parentElement.classList.contains("active")) {
+            eo.target.parentElement.parentElement.querySelectorAll(".props input[type='checkbox']").forEach((prop) => {
+                prop.checked = false
+            }) 
+        }
     }
 })
 

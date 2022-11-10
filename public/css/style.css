@@ -30,43 +30,43 @@ a {
 }
 
 .prepared {
-  --status-color:#03a9f4;
+  --status-color: #03a9f4;
 }
 
 .shipped {
-  --status-color:#2196f3;
+  --status-color: #2196f3;
 }
 
 .delivered {
-  --status-color:#8bc34a;
+  --status-color: #8bc34a;
 }
 
 .paid {
-  --status-color:#4caf50;
+  --status-color: #4caf50;
 }
 
 .outofstock {
-  --status-color:#ff9800;
+  --status-color: #ff9800;
 }
 
 .unreached {
-  --status-color:#ff03d3;
+  --status-color: #ff03d3;
 }
 
 .canceled {
-  --status-color:#f44336;
+  --status-color: #f44336;
 }
 
 .refused {
-  --status-color:#ff0000;
+  --status-color: #ff0000;
 }
 
 .awaiting_return {
-  --status-color:#444444;
+  --status-color: #444444;
 }
 
 .returned {
-  --status-color:#000000;
+  --status-color: #000000;
 }
 
 .pending {
@@ -150,45 +150,109 @@ a {
 .table-container {
   overflow: auto;
 }
-.table-container table, .table-container .table {
+.table-container table,
+.table-container .table {
   width: 100%;
   text-align: center;
 }
-.table-container table tr, .table-container table .tr, .table-container .table tr, .table-container .table .tr {
+.table-container table tr,
+.table-container table .tr,
+.table-container .table tr,
+.table-container .table .tr {
   height: 50px;
   border: 2px solid rgba(94, 94, 94, 0.2588235294);
   border-top: none;
 }
-.table-container table tr:nth-child(odd), .table-container table .tr:nth-child(odd), .table-container .table tr:nth-child(odd), .table-container .table .tr:nth-child(odd) {
+.table-container table tr:nth-child(odd),
+.table-container table .tr:nth-child(odd),
+.table-container .table tr:nth-child(odd),
+.table-container .table .tr:nth-child(odd) {
   background-color: #eee;
 }
-.table-container table tr th, .table-container table tr .th, .table-container table .tr th, .table-container table .tr .th, .table-container .table tr th, .table-container .table tr .th, .table-container .table .tr th, .table-container .table .tr .th {
+.table-container table tr th,
+.table-container table tr .th,
+.table-container table .tr th,
+.table-container table .tr .th,
+.table-container .table tr th,
+.table-container .table tr .th,
+.table-container .table .tr th,
+.table-container .table .tr .th {
   background: #5e5e5e;
   color: #fff;
   border: 2px solid #5e5e5e;
 }
-.table-container table tr td, .table-container table tr .td, .table-container table .tr td, .table-container table .tr .td, .table-container .table tr td, .table-container .table tr .td, .table-container .table .tr td, .table-container .table .tr .td {
+.table-container table tr td,
+.table-container table tr .td,
+.table-container table .tr td,
+.table-container table .tr .td,
+.table-container .table tr td,
+.table-container .table tr .td,
+.table-container .table .tr td,
+.table-container .table .tr .td {
   padding: 4px 8px;
 }
-.table-container table tr td.date, .table-container table tr .td.date, .table-container table .tr td.date, .table-container table .tr .td.date, .table-container .table tr td.date, .table-container .table tr .td.date, .table-container .table .tr td.date, .table-container .table .tr .td.date {
+.table-container table tr td.date,
+.table-container table tr .td.date,
+.table-container table .tr td.date,
+.table-container table .tr .td.date,
+.table-container .table tr td.date,
+.table-container .table tr .td.date,
+.table-container .table .tr td.date,
+.table-container .table .tr .td.date {
   font-weight: 600;
   font-size: 14px;
   white-space: nowrap;
 }
-.table-container table tr td.customer, .table-container table tr td .name, .table-container table tr .td.customer, .table-container table tr .td .name, .table-container table .tr td.customer, .table-container table .tr td .name, .table-container table .tr .td.customer, .table-container table .tr .td .name, .table-container .table tr td.customer, .table-container .table tr td .name, .table-container .table tr .td.customer, .table-container .table tr .td .name, .table-container .table .tr td.customer, .table-container .table .tr td .name, .table-container .table .tr .td.customer, .table-container .table .tr .td .name {
+.table-container table tr td.customer,
+.table-container table tr td .name,
+.table-container table tr .td.customer,
+.table-container table tr .td .name,
+.table-container table .tr td.customer,
+.table-container table .tr td .name,
+.table-container table .tr .td.customer,
+.table-container table .tr .td .name,
+.table-container .table tr td.customer,
+.table-container .table tr td .name,
+.table-container .table tr .td.customer,
+.table-container .table tr .td .name,
+.table-container .table .tr td.customer,
+.table-container .table .tr td .name,
+.table-container .table .tr .td.customer,
+.table-container .table .tr .td .name {
   font-weight: bold;
   color: #2196f3;
   white-space: nowrap;
 }
-.table-container table tr td.collection, .table-container table tr .td.collection, .table-container table .tr td.collection, .table-container table .tr .td.collection, .table-container .table tr td.collection, .table-container .table tr .td.collection, .table-container .table .tr td.collection, .table-container .table .tr .td.collection {
+.table-container table tr td.collection,
+.table-container table tr .td.collection,
+.table-container table .tr td.collection,
+.table-container table .tr .td.collection,
+.table-container .table tr td.collection,
+.table-container .table tr .td.collection,
+.table-container .table .tr td.collection,
+.table-container .table .tr .td.collection {
   font-weight: bold;
   color: #607d8b;
   white-space: nowrap;
 }
-.table-container table tr td.status, .table-container table tr .td.status, .table-container table .tr td.status, .table-container table .tr .td.status, .table-container .table tr td.status, .table-container .table tr .td.status, .table-container .table .tr td.status, .table-container .table .tr .td.status {
+.table-container table tr td.status,
+.table-container table tr .td.status,
+.table-container table .tr td.status,
+.table-container table .tr .td.status,
+.table-container .table tr td.status,
+.table-container .table tr .td.status,
+.table-container .table .tr td.status,
+.table-container .table .tr .td.status {
   opacity: 1;
 }
-.table-container table tr td.status .not-select, .table-container table tr .td.status .not-select, .table-container table .tr td.status .not-select, .table-container table .tr .td.status .not-select, .table-container .table tr td.status .not-select, .table-container .table tr .td.status .not-select, .table-container .table .tr td.status .not-select, .table-container .table .tr .td.status .not-select {
+.table-container table tr td.status .not-select,
+.table-container table tr .td.status .not-select,
+.table-container table .tr td.status .not-select,
+.table-container table .tr .td.status .not-select,
+.table-container .table tr td.status .not-select,
+.table-container .table tr .td.status .not-select,
+.table-container .table .tr td.status .not-select,
+.table-container .table .tr .td.status .not-select {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2588235294);
   background: #fff;
   text-transform: capitalize;
@@ -198,7 +262,14 @@ a {
   border-radius: 11px;
   padding: 3px 12px;
 }
-.table-container table tr td.status .select, .table-container table tr .td.status .select, .table-container table .tr td.status .select, .table-container table .tr .td.status .select, .table-container .table tr td.status .select, .table-container .table tr .td.status .select, .table-container .table .tr td.status .select, .table-container .table .tr .td.status .select {
+.table-container table tr td.status .select,
+.table-container table tr .td.status .select,
+.table-container table .tr td.status .select,
+.table-container table .tr .td.status .select,
+.table-container .table tr td.status .select,
+.table-container .table tr .td.status .select,
+.table-container .table .tr td.status .select,
+.table-container .table .tr .td.status .select {
   box-shadow: 0px 0px 4px var(--status-color);
   box-shadow: 0px 0px 4px rgba(18, 18, 18, 0.6117647059);
   background: #fff;
@@ -212,7 +283,14 @@ a {
   cursor: pointer;
   margin-right: 28px;
 }
-.table-container table tr td.status .select .status, .table-container table tr .td.status .select .status, .table-container table .tr td.status .select .status, .table-container table .tr .td.status .select .status, .table-container .table tr td.status .select .status, .table-container .table tr .td.status .select .status, .table-container .table .tr td.status .select .status, .table-container .table .tr .td.status .select .status {
+.table-container table tr td.status .select .status,
+.table-container table tr .td.status .select .status,
+.table-container table .tr td.status .select .status,
+.table-container table .tr .td.status .select .status,
+.table-container .table tr td.status .select .status,
+.table-container .table tr .td.status .select .status,
+.table-container .table .tr td.status .select .status,
+.table-container .table .tr .td.status .select .status {
   transition: background 0.3s;
   display: flex;
   align-items: center;
@@ -220,10 +298,24 @@ a {
   height: 25px;
   justify-content: center;
 }
-.table-container table tr td.status .select .status:hover, .table-container table tr .td.status .select .status:hover, .table-container table .tr td.status .select .status:hover, .table-container table .tr .td.status .select .status:hover, .table-container .table tr td.status .select .status:hover, .table-container .table tr .td.status .select .status:hover, .table-container .table .tr td.status .select .status:hover, .table-container .table .tr .td.status .select .status:hover {
+.table-container table tr td.status .select .status:hover,
+.table-container table tr .td.status .select .status:hover,
+.table-container table .tr td.status .select .status:hover,
+.table-container table .tr .td.status .select .status:hover,
+.table-container .table tr td.status .select .status:hover,
+.table-container .table tr .td.status .select .status:hover,
+.table-container .table .tr td.status .select .status:hover,
+.table-container .table .tr .td.status .select .status:hover {
   opacity: 1;
 }
-.table-container table tr td.status .select .status i, .table-container table tr .td.status .select .status i, .table-container table .tr td.status .select .status i, .table-container table .tr .td.status .select .status i, .table-container .table tr td.status .select .status i, .table-container .table tr .td.status .select .status i, .table-container .table .tr td.status .select .status i, .table-container .table .tr .td.status .select .status i {
+.table-container table tr td.status .select .status i,
+.table-container table tr .td.status .select .status i,
+.table-container table .tr td.status .select .status i,
+.table-container table .tr .td.status .select .status i,
+.table-container .table tr td.status .select .status i,
+.table-container .table tr .td.status .select .status i,
+.table-container .table .tr td.status .select .status i,
+.table-container .table .tr .td.status .select .status i {
   background: #fdfdfd;
   position: absolute;
   right: -34px;
@@ -236,7 +328,14 @@ a {
   border-radius: 4px;
   box-shadow: 0px 0px 3px rgba(18, 18, 18, 0.6117647059);
 }
-.table-container table tr td.status .select .options, .table-container table tr .td.status .select .options, .table-container table .tr td.status .select .options, .table-container table .tr .td.status .select .options, .table-container .table tr td.status .select .options, .table-container .table tr .td.status .select .options, .table-container .table .tr td.status .select .options, .table-container .table .tr .td.status .select .options {
+.table-container table tr td.status .select .options,
+.table-container table tr .td.status .select .options,
+.table-container table .tr td.status .select .options,
+.table-container table .tr .td.status .select .options,
+.table-container .table tr td.status .select .options,
+.table-container .table tr .td.status .select .options,
+.table-container .table .tr td.status .select .options,
+.table-container .table .tr .td.status .select .options {
   position: fixed;
   background: #fff;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
@@ -244,7 +343,14 @@ a {
   transform: translateX(-103%);
   border-radius: 8px;
 }
-.table-container table tr td.status .select .options.pupPri, .table-container table tr .td.status .select .options.pupPri, .table-container table .tr td.status .select .options.pupPri, .table-container table .tr .td.status .select .options.pupPri, .table-container .table tr td.status .select .options.pupPri, .table-container .table tr .td.status .select .options.pupPri, .table-container .table .tr td.status .select .options.pupPri, .table-container .table .tr .td.status .select .options.pupPri {
+.table-container table tr td.status .select .options.pupPri,
+.table-container table tr .td.status .select .options.pupPri,
+.table-container table .tr td.status .select .options.pupPri,
+.table-container table .tr .td.status .select .options.pupPri,
+.table-container .table tr td.status .select .options.pupPri,
+.table-container .table tr .td.status .select .options.pupPri,
+.table-container .table .tr td.status .select .options.pupPri,
+.table-container .table .tr .td.status .select .options.pupPri {
   position: absolute !important;
   left: 50% !important;
   transform: translateX(-50%);
@@ -252,50 +358,162 @@ a {
   min-width: 100%;
   top: inherit !important;
 }
-.table-container table tr td.status .select .options .option, .table-container table tr .td.status .select .options .option, .table-container table .tr td.status .select .options .option, .table-container table .tr .td.status .select .options .option, .table-container .table tr td.status .select .options .option, .table-container .table tr .td.status .select .options .option, .table-container .table .tr td.status .select .options .option, .table-container .table .tr .td.status .select .options .option {
+.table-container table tr td.status .select .options .option,
+.table-container table tr .td.status .select .options .option,
+.table-container table .tr td.status .select .options .option,
+.table-container table .tr .td.status .select .options .option,
+.table-container .table tr td.status .select .options .option,
+.table-container .table tr .td.status .select .options .option,
+.table-container .table .tr td.status .select .options .option,
+.table-container .table .tr .td.status .select .options .option {
   padding: 5px 15px;
   transition: background 0.3s;
   color: var(--status-color);
   color: #444;
 }
-.table-container table tr td.status .select .options .option:not(:last-child), .table-container table tr .td.status .select .options .option:not(:last-child), .table-container table .tr td.status .select .options .option:not(:last-child), .table-container table .tr .td.status .select .options .option:not(:last-child), .table-container .table tr td.status .select .options .option:not(:last-child), .table-container .table tr .td.status .select .options .option:not(:last-child), .table-container .table .tr td.status .select .options .option:not(:last-child), .table-container .table .tr .td.status .select .options .option:not(:last-child) {
+.table-container table tr td.status .select .options .option:not(:last-child),
+.table-container table tr .td.status .select .options .option:not(:last-child),
+.table-container table .tr td.status .select .options .option:not(:last-child),
+.table-container table .tr .td.status .select .options .option:not(:last-child),
+.table-container .table tr td.status .select .options .option:not(:last-child),
+.table-container .table tr .td.status .select .options .option:not(:last-child),
+.table-container .table .tr td.status .select .options .option:not(:last-child),
+.table-container .table .tr .td.status .select .options .option:not(:last-child) {
   border-bottom: 1px solid #dbd8d8;
 }
-.table-container table tr td.status .select .options .option:hover, .table-container table tr .td.status .select .options .option:hover, .table-container table .tr td.status .select .options .option:hover, .table-container table .tr .td.status .select .options .option:hover, .table-container .table tr td.status .select .options .option:hover, .table-container .table tr .td.status .select .options .option:hover, .table-container .table .tr td.status .select .options .option:hover, .table-container .table .tr .td.status .select .options .option:hover {
+.table-container table tr td.status .select .options .option:hover,
+.table-container table tr .td.status .select .options .option:hover,
+.table-container table .tr td.status .select .options .option:hover,
+.table-container table .tr .td.status .select .options .option:hover,
+.table-container .table tr td.status .select .options .option:hover,
+.table-container .table tr .td.status .select .options .option:hover,
+.table-container .table .tr td.status .select .options .option:hover,
+.table-container .table .tr .td.status .select .options .option:hover {
   background-color: #eee;
 }
-.table-container table tr td.total, .table-container table tr td.quantite, .table-container table tr td.price, .table-container table tr .td.total, .table-container table tr .td.quantite, .table-container table tr .td.price, .table-container table .tr td.total, .table-container table .tr td.quantite, .table-container table .tr td.price, .table-container table .tr .td.total, .table-container table .tr .td.quantite, .table-container table .tr .td.price, .table-container .table tr td.total, .table-container .table tr td.quantite, .table-container .table tr td.price, .table-container .table tr .td.total, .table-container .table tr .td.quantite, .table-container .table tr .td.price, .table-container .table .tr td.total, .table-container .table .tr td.quantite, .table-container .table .tr td.price, .table-container .table .tr .td.total, .table-container .table .tr .td.quantite, .table-container .table .tr .td.price {
+.table-container table tr td.total, .table-container table tr td.quantite, .table-container table tr td.price,
+.table-container table tr .td.total,
+.table-container table tr .td.quantite,
+.table-container table tr .td.price,
+.table-container table .tr td.total,
+.table-container table .tr td.quantite,
+.table-container table .tr td.price,
+.table-container table .tr .td.total,
+.table-container table .tr .td.quantite,
+.table-container table .tr .td.price,
+.table-container .table tr td.total,
+.table-container .table tr td.quantite,
+.table-container .table tr td.price,
+.table-container .table tr .td.total,
+.table-container .table tr .td.quantite,
+.table-container .table tr .td.price,
+.table-container .table .tr td.total,
+.table-container .table .tr td.quantite,
+.table-container .table .tr td.price,
+.table-container .table .tr .td.total,
+.table-container .table .tr .td.quantite,
+.table-container .table .tr .td.price {
   font-family: monospace;
   font-weight: bold;
   color: #1c9521;
   font-size: 16px;
 }
-.table-container table tr td.total span, .table-container table tr td.quantite span, .table-container table tr td.price span, .table-container table tr .td.total span, .table-container table tr .td.quantite span, .table-container table tr .td.price span, .table-container table .tr td.total span, .table-container table .tr td.quantite span, .table-container table .tr td.price span, .table-container table .tr .td.total span, .table-container table .tr .td.quantite span, .table-container table .tr .td.price span, .table-container .table tr td.total span, .table-container .table tr td.quantite span, .table-container .table tr td.price span, .table-container .table tr .td.total span, .table-container .table tr .td.quantite span, .table-container .table tr .td.price span, .table-container .table .tr td.total span, .table-container .table .tr td.quantite span, .table-container .table .tr td.price span, .table-container .table .tr .td.total span, .table-container .table .tr .td.quantite span, .table-container .table .tr .td.price span {
+.table-container table tr td.total span, .table-container table tr td.quantite span, .table-container table tr td.price span,
+.table-container table tr .td.total span,
+.table-container table tr .td.quantite span,
+.table-container table tr .td.price span,
+.table-container table .tr td.total span,
+.table-container table .tr td.quantite span,
+.table-container table .tr td.price span,
+.table-container table .tr .td.total span,
+.table-container table .tr .td.quantite span,
+.table-container table .tr .td.price span,
+.table-container .table tr td.total span,
+.table-container .table tr td.quantite span,
+.table-container .table tr td.price span,
+.table-container .table tr .td.total span,
+.table-container .table tr .td.quantite span,
+.table-container .table tr .td.price span,
+.table-container .table .tr td.total span,
+.table-container .table .tr td.quantite span,
+.table-container .table .tr td.price span,
+.table-container .table .tr .td.total span,
+.table-container .table .tr .td.quantite span,
+.table-container .table .tr .td.price span {
   color: initial;
   margin-left: 4px;
   font-size: 13px;
 }
-.table-container table tr td.action, .table-container table tr .td.action, .table-container table .tr td.action, .table-container table .tr .td.action, .table-container .table tr td.action, .table-container .table tr .td.action, .table-container .table .tr td.action, .table-container .table .tr .td.action {
+.table-container table tr td.action,
+.table-container table tr .td.action,
+.table-container table .tr td.action,
+.table-container table .tr .td.action,
+.table-container .table tr td.action,
+.table-container .table tr .td.action,
+.table-container .table .tr td.action,
+.table-container .table .tr .td.action {
   opacity: 1;
 }
-.table-container table tr td.action i, .table-container table tr .td.action i, .table-container table .tr td.action i, .table-container table .tr .td.action i, .table-container .table tr td.action i, .table-container .table tr .td.action i, .table-container .table .tr td.action i, .table-container .table .tr .td.action i {
+.table-container table tr td.action i,
+.table-container table tr .td.action i,
+.table-container table .tr td.action i,
+.table-container table .tr .td.action i,
+.table-container .table tr td.action i,
+.table-container .table tr .td.action i,
+.table-container .table .tr td.action i,
+.table-container .table .tr .td.action i {
   color: #2196f3;
   cursor: pointer;
 }
-.table-container table tr td.image, .table-container table tr .td.image, .table-container table .tr td.image, .table-container table .tr .td.image, .table-container .table tr td.image, .table-container .table tr .td.image, .table-container .table .tr td.image, .table-container .table .tr .td.image {
+.table-container table tr td.image,
+.table-container table tr .td.image,
+.table-container table .tr td.image,
+.table-container table .tr .td.image,
+.table-container .table tr td.image,
+.table-container .table tr .td.image,
+.table-container .table .tr td.image,
+.table-container .table .tr .td.image {
   opacity: 1;
 }
-.table-container table tr td.image img, .table-container table tr .td.image img, .table-container table .tr td.image img, .table-container table .tr .td.image img, .table-container .table tr td.image img, .table-container .table tr .td.image img, .table-container .table .tr td.image img, .table-container .table .tr .td.image img {
+.table-container table tr td.image img,
+.table-container table tr .td.image img,
+.table-container table .tr td.image img,
+.table-container table .tr .td.image img,
+.table-container .table tr td.image img,
+.table-container .table tr .td.image img,
+.table-container .table .tr td.image img,
+.table-container .table .tr .td.image img {
   max-width: 50px;
   max-height: 50px;
 }
-.table-container table tr td.product, .table-container table tr .td.product, .table-container table .tr td.product, .table-container table .tr .td.product, .table-container .table tr td.product, .table-container .table tr .td.product, .table-container .table .tr td.product, .table-container .table .tr .td.product {
+.table-container table tr td.product,
+.table-container table tr .td.product,
+.table-container table .tr td.product,
+.table-container table .tr .td.product,
+.table-container .table tr td.product,
+.table-container .table tr .td.product,
+.table-container .table .tr td.product,
+.table-container .table .tr .td.product {
   opacity: 1;
 }
-.table-container table tr td.product .name, .table-container table tr .td.product .name, .table-container table .tr td.product .name, .table-container table .tr .td.product .name, .table-container .table tr td.product .name, .table-container .table tr .td.product .name, .table-container .table .tr td.product .name, .table-container .table .tr .td.product .name {
+.table-container table tr td.product .name,
+.table-container table tr .td.product .name,
+.table-container table .tr td.product .name,
+.table-container table .tr .td.product .name,
+.table-container .table tr td.product .name,
+.table-container .table tr .td.product .name,
+.table-container .table .tr td.product .name,
+.table-container .table .tr .td.product .name {
   opacity: 1;
 }
-.table-container table tr td.product p, .table-container table tr .td.product p, .table-container table .tr td.product p, .table-container table .tr .td.product p, .table-container .table tr td.product p, .table-container .table tr .td.product p, .table-container .table .tr td.product p, .table-container .table .tr .td.product p {
+.table-container table tr td.product p,
+.table-container table tr .td.product p,
+.table-container table .tr td.product p,
+.table-container table .tr .td.product p,
+.table-container .table tr td.product p,
+.table-container .table tr .td.product p,
+.table-container .table .tr td.product p,
+.table-container .table .tr .td.product p {
   margin: 0;
   font-size: 14px;
   font-weight: 600;
@@ -307,17 +525,38 @@ a {
   text-transform: uppercase;
   gap: 1px;
 }
-.table-container table tr td.product p .color, .table-container table tr .td.product p .color, .table-container table .tr td.product p .color, .table-container table .tr .td.product p .color, .table-container .table tr td.product p .color, .table-container .table tr .td.product p .color, .table-container .table .tr td.product p .color, .table-container .table .tr .td.product p .color {
+.table-container table tr td.product p .color,
+.table-container table tr .td.product p .color,
+.table-container table .tr td.product p .color,
+.table-container table .tr .td.product p .color,
+.table-container .table tr td.product p .color,
+.table-container .table tr .td.product p .color,
+.table-container .table .tr td.product p .color,
+.table-container .table .tr .td.product p .color {
   background: var(--c);
   border-radius: 50%;
   width: 15px;
   height: 15px;
   display: inline-block;
 }
-.table-container table tr td.quantite, .table-container table tr .td.quantite, .table-container table .tr td.quantite, .table-container table .tr .td.quantite, .table-container .table tr td.quantite, .table-container .table tr .td.quantite, .table-container .table .tr td.quantite, .table-container .table .tr .td.quantite {
+.table-container table tr td.quantite,
+.table-container table tr .td.quantite,
+.table-container table .tr td.quantite,
+.table-container table .tr .td.quantite,
+.table-container .table tr td.quantite,
+.table-container .table tr .td.quantite,
+.table-container .table .tr td.quantite,
+.table-container .table .tr .td.quantite {
   color: inherit;
 }
-.table-container table tr td.price, .table-container table tr .td.price, .table-container table .tr td.price, .table-container table .tr .td.price, .table-container .table tr td.price, .table-container .table tr .td.price, .table-container .table .tr td.price, .table-container .table .tr .td.price {
+.table-container table tr td.price,
+.table-container table tr .td.price,
+.table-container table .tr td.price,
+.table-container table .tr .td.price,
+.table-container .table tr td.price,
+.table-container .table tr .td.price,
+.table-container .table .tr td.price,
+.table-container .table .tr .td.price {
   color: indianred;
 }
 
@@ -737,6 +976,18 @@ a {
   font-size: 35px;
   cursor: pointer;
 }
+.page .main-content .container .content .widget:not(.active) {
+  padding-bottom: 10px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.page .main-content .container .content .widget:not(.active) .props {
+  margin: 0;
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+}
 .page .main-content .container .shoe-size-widget {
   color: #000;
 }
@@ -1012,7 +1263,8 @@ a {
   display: flex;
   gap: 10px;
 }
-.page .main-content .container .orders .head .buttons a, .page .main-content .container .orders .head .buttons button {
+.page .main-content .container .orders .head .buttons a,
+.page .main-content .container .orders .head .buttons button {
   color: #fff;
   padding: 9px 13px;
   border-radius: 6px;
@@ -1055,7 +1307,8 @@ a {
   font-size: 15px;
   color: #444;
 }
-.page .main-content .container .orders form.select-filter .container-filter .search-box input, .page .main-content .container .orders form.select-filter .container-filter .search-box select {
+.page .main-content .container .orders form.select-filter .container-filter .search-box input,
+.page .main-content .container .orders form.select-filter .container-filter .search-box select {
   width: 100%;
   height: 35px;
   outline: none;
@@ -1454,7 +1707,10 @@ section.description {
 .bottom-form a {
   all: unset;
 }
-.bottom-form button, .bottom-form select, .bottom-form a, .bottom-form .add-product-btn {
+.bottom-form button,
+.bottom-form select,
+.bottom-form a,
+.bottom-form .add-product-btn {
   padding: 10px;
   margin-top: 20px;
   border: none;
@@ -1523,7 +1779,9 @@ section.modal .popup .footer-modal {
   padding: 10px;
   justify-content: end;
 }
-section.modal .popup .footer-modal button, section.modal .popup .footer-modal .cancel, section.modal .popup .footer-modal a {
+section.modal .popup .footer-modal button,
+section.modal .popup .footer-modal .cancel,
+section.modal .popup .footer-modal a {
   border: none;
   outline: none;
   color: #f2f2f2;
@@ -1533,10 +1791,13 @@ section.modal .popup .footer-modal button, section.modal .popup .footer-modal .c
   cursor: pointer;
   transition: opacity 0.3s;
 }
-section.modal .popup .footer-modal button:hover, section.modal .popup .footer-modal .cancel:hover, section.modal .popup .footer-modal a:hover {
+section.modal .popup .footer-modal button:hover,
+section.modal .popup .footer-modal .cancel:hover,
+section.modal .popup .footer-modal a:hover {
   opacity: 0.7;
 }
-section.modal .popup .footer-modal button, section.modal .popup .footer-modal a {
+section.modal .popup .footer-modal button,
+section.modal .popup .footer-modal a {
   color: #f2f2f2;
   background: var(--modal-color);
 }
@@ -1626,7 +1887,7 @@ section.modal .popup .footer-modal .cancel {
   border: none;
   border-bottom: 3px solid #777;
   padding: 10px;
-  border-radius: 7Px;
+  border-radius: 7px;
   background: rgba(245, 245, 245, 0.7215686275);
   color: #444;
   font-size: 17px;
