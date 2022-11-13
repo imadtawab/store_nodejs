@@ -1,6 +1,6 @@
 const allProducts = require("../models/addProductSchema")
 const allOrders = require("../models/newOrderSchema")
-
+// const visitor = require("../models/numberVisitors")
 
 // ##############################
 
@@ -13,12 +13,13 @@ const allOrders = require("../models/newOrderSchema")
 const client_home_get = (req,res,next) => {
     allProducts.find().then((result) => {
         res.render("home",{pageName:"Home",allProducts:result})
-        if (req.session.visitor) {
-            console.log("eeeeeeeeeee!!!!!!!!!")
-        } else {
-            req.session.visitor = 0
-            console.log(req.session,"aaaaaaaa!!!!")
-        }
+        
+    if (req.session.visitor) {
+        console.log("eeeeeeeeeeea!!!!!!!!!")
+    } else {
+        req.session.visitor = "visitor"
+        console.log(req.session,"aaaaaaaa!!!!")
+    }
     }).catch(err => console.log(err))
 
 }

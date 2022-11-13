@@ -5,7 +5,6 @@ const bodyParser = require("body-parser").urlencoded({extended: true})
 // multer
 const multer = require("multer")
 // Url DB 
-// const URL_DB_LOCAL = "mongodb://localhost:27017"
 // const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
 // Auth
 const auth = require("../../models/guard_auth")
@@ -47,7 +46,7 @@ const mongoDbStore = require("connect-mongodb-session")(session)
 // Create Store {New Collection}
 let Store = new mongoDbStore({
     uri: process.env.URL_DB,
-    collection: "mysessions"
+    collection: "mysession"
 })
 route.use(session({
     secret: "user user",

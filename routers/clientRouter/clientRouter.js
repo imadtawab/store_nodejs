@@ -10,7 +10,6 @@ const {
 
 
 // URL DB
-// const URL_DB_LOCAL = "mongodb://localhost:27017"
 // const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
 // express session
 const session = require("express-session")
@@ -19,7 +18,7 @@ const mongoDbStore = require("connect-mongodb-session")(session)
 // visitors
 let vStore = new mongoDbStore({
     uri: process.env.URL_DB,
-    collection: "visitors"
+    collection: "visitor"
 })
 route.use(session({
     secret: "user user",
@@ -31,7 +30,6 @@ route.use(session({
     saveUninitialized: true
 }))
 // URL DB
-// const URL_DB_LOCAL = "mongodb://localhost:27017"
 // express session
 // const session = require("express-session")
 // mongodb Store

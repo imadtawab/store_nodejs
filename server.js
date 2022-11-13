@@ -15,7 +15,6 @@ app.set("views","views")
 // mongoose
 const mongoose = require("mongoose")
 // const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
-// const URL_DB_LOCAL = "mongodb://localhost:27017"
 mongoose.connect(process.env.URL_DB,{useNewUrlParser:true,useUnifiedTopology:true}).then((result) => {
     console.log("connect !!") 
     app.listen(process.env.PORT || 5555,() => {
