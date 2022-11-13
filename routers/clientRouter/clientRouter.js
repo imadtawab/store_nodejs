@@ -27,7 +27,7 @@ route.use(session({
         // maxAge: 604800000
     },
     store: vStore,
-    resave: false,
+    resave: true,
     saveUninitialized: true
 }))
 // URL DB

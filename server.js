@@ -22,7 +22,7 @@ mongoose.connect(process.env.URL_DB,{useNewUrlParser:true,useUnifiedTopology:tru
 }).catch(err => console.log(err))
 
 // 
-app.use(helmet());
+app.use(helmet()); 
 // statics folder
 app.use(express.static(path.join(__dirname,"public")))
 
