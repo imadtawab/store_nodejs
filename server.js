@@ -28,9 +28,8 @@ app.use(helmet());
 // statics folder
 app.use(express.static(path.join(__dirname,"public")))
 
-
-app.use("/",clientRoute)
 app.use("/admin",adminRoute)
+app.use("/",clientRoute)
 
 app.use((req,res) => {
     res.send("404")
