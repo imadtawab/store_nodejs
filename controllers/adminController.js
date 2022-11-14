@@ -116,7 +116,7 @@ const admin_addNewProduct_post = (req,res) => {
         addedIn: `${checkDate(date.getFullYear())}-${checkDate(date.getMonth() + 1)}-${checkDate(date.getDate())} ${checkDate(date.getHours())}:${checkDate(date.getMinutes())}`
       }).save()
     .then((result) => {
-      console.log(result,"saved !!")  
+    // console.log(result,"saved !!")  
       res.redirect("/admin/addNewProduct")
     })
 }
@@ -131,7 +131,7 @@ const admin_allProducts_get = (req,res) => {
 
 const admin_allProduct_delete = (req,res) => {
     allProducts.deleteOne({_id:req.params.id}).then((result) => {
-        console.log(result,"delete !!")
+        // console.log(result,"delete !!")
         res.redirect("/admin/allproducts")
     }).catch(err => console.log(err))
 }
@@ -171,7 +171,7 @@ const admin_dashboard_get = (req,res) => {
 const admin_allOrders_delete =  (req,res) => {
     allOrders.deleteOne({_id:req.params.id}).then((result) => {
         console.log(result,"delete !!")
-        res.redirect("/admin/orders")
+        // res.redirect("/admin/orders")
     }).catch(err => console.log(err))
 }
 const admin_UpdateProduct_get = (req,res) => {
@@ -239,7 +239,7 @@ const admin_register_post = (req,res) => {
     }
     registerAccount.findOne({email:req.body.email}).then((user) => {
         if (user) {
-            console.log("This email is used ...")
+            // console.log("This email is used ...")
             req.flash("error","This email is used ...")
             req.flash("myuser",{email:req.body.email,userName:req.body.userName})
             res.redirect("/admin/register")
@@ -268,10 +268,10 @@ const admin_login_post = (req,res) => {
             bcrypt.compare(req.body.password,verifUser.password).then((verifPass) => {
                 if(verifPass){
                     req.session.userId = verifUser._id
-                    console.log("Welecom " + verifUser.userName)
+                    // console.log("Welecom " + verifUser.userName)
                     res.redirect("/admin")
                 }else{
-                    console.log("Password Not Correct ...")
+                    // console.log("Password Not Correct ...")
                     req.flash("error","Email Or Password Not Correct ...")
                     req.flash("myuser",{email:req.body.email})
                     res.redirect("/admin/login")
@@ -279,7 +279,7 @@ const admin_login_post = (req,res) => {
 
             })
         } else {
-            console.log("This Email Not Exist ...")
+            // console.log("This Email Not Exist ...")
             req.flash("error","Email Or Password Not Correct ...")
             req.flash("myuser",{email:req.body.email})
             res.redirect("/admin/login")
