@@ -39,7 +39,7 @@ const {admin_addNewProduct_get,
 
 // express session
 const session = require("express-session")
-const { db } = require("../../models/addProductSchema")
+// const { db } = require("../../models/addProductSchema")
 // mongodb Store
 const mongoDbStore = require("connect-mongodb-session")(session)
 
@@ -96,14 +96,6 @@ route.get("/orders/changeStatus",auth,admin_ordersChangeStatus_get)
 route.get("/orders/:id",auth,admin_orderDetails_get)
 route.get("/orders/delete/:id",auth,admin_allOrders_delete)
 
-route.get("/register",admin_register_get)
-route.post("/register",bodyParser,admin_register_post)
-
-route.get("/login",admin_login_get)
-route.post("/login",bodyParser,admin_login_post)
-
-route.get("/logout",auth,admin_logout_get)
-
 route.get("/profile",auth,admin_profile_get)
 route.post("/profile",auth,multer({
     storage:multer.diskStorage({
@@ -115,5 +107,13 @@ route.post("/profile",auth,multer({
         }
     })
 }).single("image"),admin_profile_post)
+
+route.get("/register",admin_register_get)
+route.post("/register",bodyParser,admin_register_post)
+
+route.get("/login",admin_login_get)
+route.post("/login",bodyParser,admin_login_post)
+
+route.get("/logout",auth,admin_logout_get)
 
 module.exports = route

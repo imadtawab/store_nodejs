@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt")
 
 
 // nodemailer
-const nodemailer = require("nodemailer")
+// const nodemailer = require("nodemailer")
 
 // const transporter = nodemailer.createTransport({
 //     service: "gmail",
@@ -171,7 +171,7 @@ const admin_dashboard_get = (req,res) => {
 const admin_allOrders_delete =  (req,res) => {
     allOrders.deleteOne({_id:req.params.id}).then((result) => {
         console.log(result,"delete !!")
-        // res.redirect("/admin/orders")
+        res.redirect("/admin/orders")
     }).catch(err => console.log(err))
 }
 const admin_UpdateProduct_get = (req,res) => {

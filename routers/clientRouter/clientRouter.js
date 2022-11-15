@@ -16,19 +16,19 @@ const session = require("express-session")
 // mongodb Store
 const mongoDbStore = require("connect-mongodb-session")(session)
 // visitors
-let vStore = new mongoDbStore({
-    uri: process.env.URL_DB,
-    collection: "visitor"
-})
-route.use(session({
-    secret: "user user",
-    cookie: {
+// let vStore = new mongoDbStore({
+    // uri: process.env.URL_DB,
+    // collection: "visitor"
+// })
+// route.use(session({
+    // secret: "visitor",
+    // cookie: {
         // maxAge: 604800000
-    },
-    store: vStore,
-    resave: true,
-    saveUninitialized: true
-}))
+    // },
+    // store: vStore,
+    // resave: true,
+    // saveUninitialized: true
+// }))
 // URL DB
 // express session
 // const session = require("express-session")

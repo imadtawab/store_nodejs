@@ -1573,10 +1573,10 @@ section.modal .popup .footer-modal .cancel {
 }
 .register header {
   padding: 0px 20px;
+  padding-right: 0;
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  flex-wrap: wrap;
   align-items: center;
   background: #fff;
 }
@@ -1588,7 +1588,6 @@ section.modal .popup .footer-modal .cancel {
 }
 .register header nav {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
 }
 .register header nav a {

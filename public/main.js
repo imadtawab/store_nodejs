@@ -224,7 +224,8 @@ function deleteImgs() {
                     // delete_image
                     deleteImg.forEach((item) => {
                         item.onclick=function(eo){
-                            eo.target.parentElement.remove()
+                            console.log(aaaa=eo.target)
+                            eo.target.parentElement.parentElement.remove()
                         }
                     })
                     

@@ -13,10 +13,10 @@ const allOrders = require("../models/newOrderSchema")
 const client_home_get = (req,res,next) => {
     allProducts.find().then((result) => {
         res.render("home",{pageName:"Home",allProducts:result})
-    if (!req.session.visitor) {
-        req.session.visitor = "visitor"
+    // if (!req.session.visitor) {
+        // req.session.visitor = "visitor"
         // console.log(req.session,"aaaaaaaa!!!!")
-    }
+    // }
     }).catch(err => console.log(err))
 
 }
