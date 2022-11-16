@@ -1,7 +1,8 @@
 <%- include("./partials/adminPartials/top.ejs") %>
+    <!-- form -->
+    <div class="widget profile-page">
 
-    <form method="POST" action="/admin/profile" enctype="multipart/form-data" class="widget profile-page">
-        <div class="img-profile">
+        <form method="POST" action="/admin/profile/update-image" enctype="multipart/form-data" class="img-profile">
             <% if(user.image){ %>
                 <div class="par" id="profileImg" style="background-image: url(/uploads/<%=user.image%>)">
             <% }else{ %>
@@ -11,45 +12,81 @@
             </div>
             <label for="changeImgProfile" class="change">+</label>
             <input type="file" name="image" id="changeImgProfile" class="dn"/>
-        </div>
+        </form>
+
         <!-- .profile-page .info .box .change -->
         <div class="info">
             <h4>Information</h4>
             <label for="userName">UserName :</label>
             <div class="box userName">
-                <div class="par-box">
+                <form class="par-box" method="POST" action="/admin/profile/update-username">
                     <input name="userName" type="text" id="userName" required value="<%= user.userName %>" readonly="readonly"/>
                     <!--  readonly="readonly" -->
-                    <div class="change">change</div>
-                </div>
+                    <div class="par-btn-change">
+                        <div class="change">change</div>
+                        <div class="close dn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <button type="submit" class="submit-btn dn">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
             <label for="email">Email :</label>
             <div class="box email">
-                <div class="par-box">
+                <form class="par-box" method="POST" action="/admin/profile/update-email">
                     <input name="email" type="email" id="email" required  required value="<%= user.email %>" readonly="readonly"/>
-                    <div class="change">change</div>
-                </div>
+                    <div class="par-btn-change">
+                        <div class="change">change</div>
+                        <div class="close dn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <button type="submit" class="submit-btn dn">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </form>
                 <span class="error dn">"Example@gmail.com"</span>
             </div>
-            <label for="password">Password :</label>
-            <div class="box password">
-                <div class="par-box">
-                    <input name="password" type="password" id="password" required  required readonly="readonly"/>
-                    <div class="change">change</div>
+            
+            <form action="/admin/profile/update-password" method="post" class="passForm">
+                <label for="password">Password :</label>
+                <div class="box password">
+                    <div class="par-box">
+                        <input name="password" type="password" id="password" required  required readonly="readonly"/>
+                        <div class="par-btn-change">
+                            <div class="change">change</div>
+                            <div class="close dn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <button type="submit" class="submit-btn dn">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="error dn">Password must contain uppercase ,lowercase letters and numbers and
+                        symbols</span>
                 </div>
-                <span class="error dn">Password must contain uppercase ,lowercase letters and numbers and
-                    symbols</span>
-            </div>
-            <label for="confirmPassword">Confirm password :</label>
-            <div class="box confirmPassword">
-                <div class="par-box">
-                    <input name="confirmPassword" type="password" id="confirmPassword" required readonly="readonly"/>
-                    <div style="height: 0; padding: 0 6px" class="change">change</div>
+                <label for="confirmPassword">Confirm password :</label>
+                <div class="box confirmPassword">
+                    <div class="par-box">
+                        <input name="confirmPassword" type="password" id="confirmPassword" required readonly="readonly"/>
+                        <div class="par-btn-change" style="visibility: hidden;">
+                            <div class="change">change</div>
+                            <div class="close dn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <button type="submit" class="submit-btn dn">
+                                <i class="fa-solid fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="error dn">Check Your Password</span>
                 </div>
-                <span class="error dn">Check Your Password</span>
-            </div>
-            <button id="submitBtn" type="submit" class="updateBtn">Update</button>
+            </form>
+            <!-- <button id="submitBtn" type="submit" class="updateBtn">Update</button> -->
         </div>
-    </form>
+    </div>
 
     <%- include("./partials/adminPartials/bottom.ejs") %>

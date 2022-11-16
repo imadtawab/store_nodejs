@@ -298,26 +298,36 @@ const admin_profile_get = (req,res) => {
         res.render("profile",{pageName:"Profile",user:user})
     }).catch(err => console.log(err))
 }
-const admin_profile_post = (req,res) => {
+
+
+const admin_profile_updateImage_post = (req,res) => {
+    registerAccount.updateOne({_id:req.session.userId},{
+        image:req.file.filename
+    }).then((user) => {
+        res.redirect("/admin/profile")
+    }).catch(err => console.log(err))
+}
+const admin_profile_updateuserName_post = (req,res) => {
+    registerAccount.updateOne({_id:req.session.userId},{
+        userName:req.body.userName
+    }).then((user) => {
+        res.redirect("/admin/profile")
+    }).catch(err => console.log(err))
+}
+const admin_profile_updateEmail_post = (req,res) => {
+    registerAccount.updateOne({_id:req.session.userId},{
+        email:req.body.email
+    }).then((user) => {
+        res.redirect("/admin/profile")
+    }).catch(err => console.log(err))
+}
+const admin_profile_updatePassword_post = (req,res) => {
         bcrypt.hash(req.body.password,10).then((hPass) => {
-            if (req.file) {
                 registerAccount.updateOne({_id:req.session.userId},{
-                    userName:req.body.userName,
-                    email:req.body.email,
-                    password:hPass,
-                    image:req.file.filename
-                }).then((user) => {
-                    res.redirect("/admin/profile")
-                }).catch(err => console.log(err))
-            } else {
-                registerAccount.updateOne({_id:req.session.userId},{
-                    userName:req.body.userName,
-                    email:req.body.email,
                     password:hPass,
                 }).then((user) => {
                     res.redirect("/admin/profile")
                 }).catch(err => console.log(err))
-            }
         }).catch(err => console.log(err))
 }
 module.exports = {
@@ -340,5 +350,9 @@ module.exports = {
     admin_login_post,
     admin_logout_get,
     admin_profile_get,
-    admin_profile_post
+    // admin_profile_post
+    admin_profile_updateImage_post,
+    admin_profile_updateuserName_post,
+    admin_profile_updateEmail_post,
+    admin_profile_updatePassword_post
 }

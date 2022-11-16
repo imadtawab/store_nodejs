@@ -1763,6 +1763,7 @@ section.modal .popup .footer-modal .cancel {
 }
 .profile-page .info label {
   font-size: 15px;
+  padding-bottom: 5px;
 }
 .profile-page .info .box {
   all: unset;
@@ -1779,20 +1780,52 @@ section.modal .popup .footer-modal .cancel {
 .profile-page .info .box .par-box input {
   flex: 1;
 }
-.profile-page .info .box .par-box .change {
+.profile-page .info .box .par-box .par-btn-change {
+  display: flex;
+  gap: 5px;
+}
+.profile-page .info .box .par-box .par-btn-change .change {
   background: #0d6efd;
   border-radius: 5px;
   padding: 2px 6px;
   color: #fff;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 13px;
   cursor: pointer;
+  height: 30px;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+.profile-page .info .box .par-box .par-btn-change .close, .profile-page .info .box .par-box .par-btn-change .submit-btn {
+  color: #fff;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: opacity 0.3s;
+}
+.profile-page .info .box .par-box .par-btn-change .close:hover, .profile-page .info .box .par-box .par-btn-change .submit-btn:hover {
+  opacity: 0.6;
+}
+.profile-page .info .box .par-box .par-btn-change .close {
+  background: #ff2b2b;
+}
+.profile-page .info .box .par-box .par-btn-change .submit-btn {
+  background: #25cf32;
 }
 .profile-page .info .box .error {
   font-size: 12px;
   font-weight: 600;
   color: red;
   display: block;
+  padding-top: 5px;
 }
 .profile-page .updateBtn {
   border: none;

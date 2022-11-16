@@ -17,9 +17,9 @@ const mongoose = require("mongoose")
 // const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
 mongoose.connect(process.env.URL_DB,{useNewUrlParser:true,useUnifiedTopology:true}).then((result) => {
     console.log("connect !!") 
-    app.listen(process.env.PORT || 5555,() => {
-        console.log("sucsses !!")
-    })
+    // app.listen(process.env.PORT || 5555,() => {
+    //     console.log("sucsses !!")
+    // })
 }).catch(err => console.log(err))
 
 // 
@@ -34,3 +34,6 @@ app.use((req,res) => {
     res.send("404")
 })
 
+app.listen(process.env.PORT || 5555,() => {
+    console.log("sucsses !!")
+})

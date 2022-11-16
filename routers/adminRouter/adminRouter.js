@@ -34,7 +34,11 @@ const {admin_addNewProduct_get,
     admin_login_post,
     admin_logout_get,
     admin_profile_get,
-    admin_profile_post
+    // admin_profile_post
+    admin_profile_updateImage_post,
+    admin_profile_updateuserName_post,
+    admin_profile_updateEmail_post,
+    admin_profile_updatePassword_post
 } = require("../../controllers/adminController")
 
 // express session
@@ -97,7 +101,18 @@ route.get("/orders/:id",auth,admin_orderDetails_get)
 route.get("/orders/delete/:id",auth,admin_allOrders_delete)
 
 route.get("/profile",auth,admin_profile_get)
-route.post("/profile",auth,multer({
+// route.post("/profile",auth,multer({
+//     storage:multer.diskStorage({
+//         destination:function (req,file,cb) {
+//             cb(null,"./public/uploads")
+//         },
+//         filename:function (req,file,cb) {
+//             cb(null,Date.now() + "_" + file.originalname)
+//         }
+//     })
+// }).single("image"),admin_profile_post)
+
+route.post("/profile/update-image",auth,multer({
     storage:multer.diskStorage({
         destination:function (req,file,cb) {
             cb(null,"./public/uploads")
@@ -106,7 +121,11 @@ route.post("/profile",auth,multer({
             cb(null,Date.now() + "_" + file.originalname)
         }
     })
-}).single("image"),admin_profile_post)
+}).single("image"),admin_profile_updateImage_post)
+
+route.post("/profile/update-username",auth,bodyParser,admin_profile_updateuserName_post)
+route.post("/profile/update-email",auth,bodyParser,admin_profile_updateEmail_post)
+route.post("/profile/update-password",auth,bodyParser,admin_profile_updatePassword_post)
 
 route.get("/register",admin_register_get)
 route.post("/register",bodyParser,admin_register_post)

@@ -245,41 +245,47 @@ let password = document.getElementById("password"),
 confirmPassword = document.getElementById("confirmPassword"),
 email = document.getElementById("email"),
 form = document.querySelector(".register form"),
-submitBtn = document.querySelector("form #submitBtn")
+submitBtn = document.querySelector("#submitBtn")
 let passError = false,
 ConPassError = false,
 emailError = false
 function check_confirmPassword() {
     if (confirmPassword.value == password.value) {
-        submitBtn.removeAttribute("disabled")
+        submitBtn ? submitBtn.removeAttribute("disabled") : false
         confirmPassword.parentElement.parentElement.querySelector(".error").classList.add("dn")
-        ConPassError = false
-    } else {
-        submitBtn.setAttribute("disabled","")
-        confirmPassword.parentElement.parentElement.querySelector(".error").classList.remove("dn")
         ConPassError = true
+        return true
+    } else {
+        submitBtn ? submitBtn.setAttribute("disabled","disabled") : false
+        confirmPassword.parentElement.parentElement.querySelector(".error").classList.remove("dn")
+        ConPassError = false
+        return false
     }
 }
 function check_validateEmail() {
     if (/\b([a-zA-Z0-9]){3,25}@gmail.com\b/.test(email.value)) {
-        submitBtn.removeAttribute("disabled")
+        submitBtn ? submitBtn.removeAttribute("disabled") : false
         email.parentElement.parentElement.querySelector(".error").classList.add("dn")
-        emailError = false
+        // emailError = false
+        return true
     } else {
-        submitBtn.setAttribute("disabled","")
+        submitBtn ? submitBtn.setAttribute("disabled","disabled") : false
         email.parentElement.parentElement.querySelector(".error").classList.remove("dn")
-        emailError = true
+        // emailError = true
+        return false
     }
 }
 function check_validatePassword() {
     if (/[a-z]+/.test(password.value) && /[A-Z]+/.test(password.value) && /\W+/.test(password.value) && /\d+/.test(password.value) && password.value.length >= 8) {
-        submitBtn.removeAttribute("disabled")
+        submitBtn ? submitBtn.removeAttribute("disabled") : false
         password.parentElement.parentElement.querySelector(".error").classList.add("dn")
-        passError = false
+        // passError = false
+        return true
     } else {
-        submitBtn.setAttribute("disabled","")
+        submitBtn ? submitBtn.setAttribute("disabled","disabled") : false
         password.parentElement.parentElement.querySelector(".error").classList.remove("dn")
-        passError = true
+        // passError = true
+        return false
     }
 }
 if(document.querySelector(".register") && location.pathname == "/admin/register"){
@@ -315,6 +321,9 @@ function defaultBtnActive() {
 }
 
 if(ProfileInputImg){
+    changeImgProfile.oninput = (eo) => {
+        eo.target.parentElement.submit()
+    }
     ProfileInputImg.addEventListener("change", function () {
         const file = this.files[0];
         if (file) {
@@ -344,112 +353,294 @@ let password_change = document.querySelector(".profile-page .info .password .cha
 let confirmPassword_change = document.querySelector(".profile-page .info .confirmPassword .change")
 let changeInfoBtn = document.querySelectorAll(".profile-page .info .par-box .change")
 
+
 if(document.querySelector(".profile-page")){
+    let defaultValue_userName = document.querySelector(".profile-page .info .userName input").value
+let defaultValue_email = document.querySelector(".profile-page .info .email input").value
     userName_change.onclick = (change) => {
-        if(next){
-            changeFocus(change)
+            resetChange(change,defaultValue_userName)
             // changeInfoBtn.forEach((btn) => {
             //     btn.onclick = (eo) => {
             //         changeFocus(change)
             //         console.log("email__");
             //     }
             // })
-        }
         
-        next = false
-        change.target.parentElement.querySelector("input").oninput = (eo) => {
-            if (eo.target.value.length < 3) {
-                next = false
-            } else {
-                next = true
-            }
-            console.log(next)
-        }
+    //     next = false
+    //     change.target.parentElement.parentElement.querySelector("input").oninput = (eo) => {
+    //         if (eo.target.value.length < 3) {
+    //             next = false
+    //         } else {
+    //             next = true
+    //         }
+    //         console.log(next)
+    //     }
         
+    // }
+    // email_change.onclick = (change) => {
+    //     if(next){
+    //         changeFocus(change)
+    //         // changeInfoBtn.forEach((btn) => {
+    //         //     btn.onclick = (eo) => {
+    //         //         changeFocus(change)
+    //         //         console.log("email__");
+    //         //     }
+    //         // })
+    //     }
+        
+    //     next = false
+    //     change.target.parentElement.querySelector("input").oninput = () => {
+    //         check_validateEmail()
+    //         if (emailError) {
+    //             next = false
+    //         } else {
+    //             next = true
+    //         }
+    //         console.log(next)
+    //     }
+        
+    // }
+    
+    // password_change.onclick = (change) => {
+    //     console.log("pass")
+    //     if(next){
+    //         changeFocus(change)
+    //         confirmPassword_change.parentElement.querySelector("input").readOnly = false
+    //         // changeInfoBtn.forEach((btn) => {
+    //         //     btn.onclick = (eo) => {
+    //         //         changeFocus(change)
+    //         //         console.log("pass___");
+    
+    //         //     }
+    //         // })
+    //         console.log("pass_");
+    //     }
+        
+    //     next = false
+        // change.target.parentElement.querySelector("input").oninput = () => {
+        //     passError = true
+        //     ConPassError = true
+        //     check_validatePassword()
+        //     check_confirmPassword()
+        //     if (passError && ConPassError) {
+        //         next = false
+        //     } else {
+        //         next = true
+        //     }
+        //     console.log(next)
+        // }
+        // confirmPassword_change.parentElement.querySelector("input").oninput = () => {
+        //     passError = true
+        //     ConPassError = true
+        //     check_validatePassword()            
+        //     check_confirmPassword()
+        //     if (passError || ConPassError) {
+        //         next = false
+        //     }
+        //      if(!passError && !ConPassError){
+        //         next = true
+        //     }
+        //     console.log(next)
+        // }
+        
+    // }
+    
+    // function changeFocus(change) {
+    //     changeInfoBtn.forEach((btn) => {
+    //         btn.parentElement.parentElement.querySelector("input").setAttribute("readonly","readonly")
+    //     })
+    //     change.target.parentElement.parentElement.querySelector("input").readOnly = false
+    //     change.target.parentElement.parentElement.querySelector("input").focus()
+    // }
+
+    // document.querySelector(".profile-page").onsubmit = () => {
+    //     if (passError,ConPassError,emailError) {
+    //         return false
+    //     }else{
+
+    //         return true
+    //     }
+    // }
     }
     email_change.onclick = (change) => {
-        if(next){
-            changeFocus(change)
-            // changeInfoBtn.forEach((btn) => {
-            //     btn.onclick = (eo) => {
-            //         changeFocus(change)
-            //         console.log("email__");
-            //     }
-            // })
-        }
-        
-        next = false
-        change.target.parentElement.querySelector("input").oninput = () => {
-            check_validateEmail()
-            if (emailError) {
-                next = false
-            } else {
-                next = true
-            }
-            console.log(next)
-        }
-        
+        resetChange(change,defaultValue_email,check_validateEmail)
     }
-    
     password_change.onclick = (change) => {
-        console.log("pass")
-        if(next){
-            changeFocus(change)
-            confirmPassword_change.parentElement.querySelector("input").readOnly = false
-            // changeInfoBtn.forEach((btn) => {
-            //     btn.onclick = (eo) => {
-            //         changeFocus(change)
-            //         console.log("pass___");
-    
-            //     }
-            // })
-            console.log("pass_");
-        }
-        
-        next = false
-        change.target.parentElement.querySelector("input").oninput = () => {
-            passError = true
-            ConPassError = true
-            check_validatePassword()
-            check_confirmPassword()
-            if (passError && ConPassError) {
-                next = false
-            } else {
-                next = true
-            }
-            console.log(next)
-        }
-        confirmPassword_change.parentElement.querySelector("input").oninput = () => {
-            passError = true
-            ConPassError = true
-            check_validatePassword()            
-            check_confirmPassword()
-            if (passError || ConPassError) {
-                next = false
-            }
-             if(!passError && !ConPassError){
-                next = true
-            }
-            console.log(next)
-        }
-        
+        resetChange(change,"",check_validatePassword,check_confirmPassword)
     }
-    
-    function changeFocus(change) {
-        changeInfoBtn.forEach((btn) => {
-            btn.parentElement.querySelector("input").setAttribute("readonly","readonly")
-        })
-        change.target.parentElement.querySelector("input").readOnly = false
-        change.target.parentElement.querySelector("input").focus()
-    }
-    document.querySelector("form.profile-page").onsubmit = () => {
-        if (passError,ConPassError,emailError) {
-            return false
-        }else{
 
-            return true
+function resetChange(change,defaultValue,check_validation,second_check) {
+    if(next){
+        next = false
+        let submitBtnChange = change.target.parentElement.querySelector(".submit-btn")
+        let myInput = change.target.parentElement.parentElement.querySelector("input")
+        let closeBtn = change.target.parentElement.querySelector(".close")
+
+        myInput.removeAttribute("readonly")
+        change.target == password_change ? confirmPassword.removeAttribute("readonly") : false
+        change.target.classList.add("dn")
+        submitBtnChange.classList.remove("dn")
+        closeBtn.classList.remove("dn")
+
+        closeBtn.onclick= (eo) => {
+            change.target.classList.remove("dn")
+            submitBtnChange.classList.add("dn")
+            closeBtn.classList.add("dn")
+            myInput.setAttribute("readonly","readonly")
+            change.target == password_change ? confirmPassword.setAttribute("readonly","readonly") : false
+            myInput.value = defaultValue
+            change.target == password_change ? confirmPassword.value = defaultValue : false
+            
+            next = true
         }
+        // myInput.oninput = () => {
+        //     console.log(second_check());
+        // }
+        if (change.target != password_change) {
+            console.log("ff");
+            // myInput.oninput = async () => {
+            myInput.parentElement.onsubmit = () => {
+                check_validation()
+                if (check_validation()) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        } else {
+            // myInput.oninput = () => {
+            myInput.parentElement.parentElement.parentElement.parentElement.onsubmit = () => {
+                check_validation()
+                if (check_validation()) {
+                    second_check()
+                }
+                
+                
+                if (check_validation() && second_check()) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        
     }
+}
+// if(document.querySelector(".profile-page")){
+//     userName_change.onclick = (change) => {
+//         if(next){
+//             changeFocus(change)
+//             change.target.classList.add("dn")
+//             change.target.parentElement.querySelector(".submit-btn").classList.remove("dn")
+//             change.target.parentElement.querySelector(".close").classList.remove("dn")
+//             change.target.parentElement.querySelector(".close").onclick= (eo) => {
+//                 change.target.classList.remove("dn")
+//                 change.target.parentElement.querySelector(".submit-btn").classList.add("dn")
+//                 change.target.parentElement.querySelector(".close").classList.add("dn")
+//                 change.target.parentElement.parentElement.querySelector("input").setAttribute("readonly","readonly")
+//             }
+//             // changeInfoBtn.forEach((btn) => {
+//             //     btn.onclick = (eo) => {
+//             //         changeFocus(change)
+//             //         console.log("email__");
+//             //     }
+//             // })
+//         }
+        
+//         next = false
+//         change.target.parentElement.parentElement.querySelector("input").oninput = (eo) => {
+//             if (eo.target.value.length < 3) {
+//                 next = false
+//             } else {
+//                 next = true
+//             }
+//             console.log(next)
+//         }
+        
+//     }
+//     email_change.onclick = (change) => {
+//         if(next){
+//             changeFocus(change)
+//             // changeInfoBtn.forEach((btn) => {
+//             //     btn.onclick = (eo) => {
+//             //         changeFocus(change)
+//             //         console.log("email__");
+//             //     }
+//             // })
+//         }
+        
+//         next = false
+//         change.target.parentElement.querySelector("input").oninput = () => {
+//             check_validateEmail()
+//             if (emailError) {
+//                 next = false
+//             } else {
+//                 next = true
+//             }
+//             console.log(next)
+//         }
+        
+//     }
+    
+//     password_change.onclick = (change) => {
+//         console.log("pass")
+//         if(next){
+//             changeFocus(change)
+//             confirmPassword_change.parentElement.querySelector("input").readOnly = false
+//             // changeInfoBtn.forEach((btn) => {
+//             //     btn.onclick = (eo) => {
+//             //         changeFocus(change)
+//             //         console.log("pass___");
+    
+//             //     }
+//             // })
+//             console.log("pass_");
+//         }
+        
+//         next = false
+//         change.target.parentElement.querySelector("input").oninput = () => {
+//             passError = true
+//             ConPassError = true
+//             check_validatePassword()
+//             check_confirmPassword()
+//             if (passError && ConPassError) {
+//                 next = false
+//             } else {
+//                 next = true
+//             }
+//             console.log(next)
+//         }
+//         confirmPassword_change.parentElement.querySelector("input").oninput = () => {
+//             passError = true
+//             ConPassError = true
+//             check_validatePassword()            
+//             check_confirmPassword()
+//             if (passError || ConPassError) {
+//                 next = false
+//             }
+//              if(!passError && !ConPassError){
+//                 next = true
+//             }
+//             console.log(next)
+//         }
+        
+//     }
+    
+//     function changeFocus(change) {
+//         changeInfoBtn.forEach((btn) => {
+//             btn.parentElement.parentElement.querySelector("input").setAttribute("readonly","readonly")
+//         })
+//         change.target.parentElement.parentElement.querySelector("input").readOnly = false
+//         change.target.parentElement.parentElement.querySelector("input").focus()
+//     }
+//     document.querySelector(".profile-page").onsubmit = () => {
+//         if (passError,ConPassError,emailError) {
+//             return false
+//         }else{
+
+//             return true
+//         }
+//     }
 }
 
 
