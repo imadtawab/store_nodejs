@@ -1,6 +1,10 @@
 const express = require("express")
 const route = express.Router()
 const bodyParser = require("body-parser").urlencoded({extended:true})
+
+
+
+
 // Controllers
 const {
     client_home_get,
@@ -8,27 +12,16 @@ const {
     client_productDetails_post
 } = require("../../controllers/clientController")
 
-
 // URL DB
 // const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
 // express session
 const session = require("express-session")
 // mongodb Store
 const mongoDbStore = require("connect-mongodb-session")(session)
+
 // visitors
-// let vStore = new mongoDbStore({
-    // uri: process.env.URL_DB,
-    // collection: "visitor"
-// })
-// route.use(session({
-    // secret: "visitor",
-    // cookie: {
-        // maxAge: 604800000
-    // },
-    // store: vStore,
-    // resave: true,
-    // saveUninitialized: true
-// }))
+
+
 // URL DB
 // express session
 // const session = require("express-session")
@@ -36,20 +29,20 @@ const mongoDbStore = require("connect-mongodb-session")(session)
 // const mongoDbStore = require("connect-mongodb-session")(session)
 
 // // visitors
-// let vStore = new mongoDbStore({
-//     uri: URL_DB_LOCAL,
-//     collection: "visitors"
-// })
-// route.use(session({
-//     secret: "user user",
-//     cookie: {
-//         // maxAge: 604800000
-//     },
-//     store: vStore,
-//     resave: true,
-//     saveUninitialized: true
-// }))
+let vStore = new mongoDbStore({
+    uri: process.env.URL_DB,
+    collection: "visitors"
+})
 
+route.use(session({
+    secret: "visitor",
+    cookie: {
+        // maxAge: 1000*60
+    },
+    store: vStore,
+    resave: false,
+    saveUninitialized: false
+}))
 // function calcVisitor() {
 //         if (req.session.visitor) {
 //             console.log("eeeeeeeeeee!!!!!!!!!")
@@ -59,6 +52,8 @@ const mongoDbStore = require("connect-mongodb-session")(session)
 //         // console.log(req.session,"eeeee!!!!")
 //         next()
 // }
+// flash
+
 
 // routes
 route.get("/",client_home_get)

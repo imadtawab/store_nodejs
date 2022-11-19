@@ -88,5 +88,16 @@
             <!-- <button id="submitBtn" type="submit" class="updateBtn">Update</button> -->
         </div>
     </div>
-
+                        <!--  Start Last Popup -->
+                        <% if(msg_lastPopup){ %> 
+                            <div class="container-last-popup">
+                                <div class="last-popup">
+                                    <div class="p-action"><%= msg_lastPopup %></div>
+                                    <div class="icon-check">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %> 
+                        <!--  End Last Popup -->
     <%- include("./partials/adminPartials/bottom.ejs") %>

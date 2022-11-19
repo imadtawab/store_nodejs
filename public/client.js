@@ -73,3 +73,9 @@ if(quantite){
   calculateTotal();
 }
 
+// Last Popup
+if(document.querySelector('.container-last-popup')){
+  document.querySelector('.container-last-popup .cancel').onclick = (eo) => {
+    eo.target.parentElement.parentElement.remove()
+  }
+}

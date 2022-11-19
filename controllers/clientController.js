@@ -22,7 +22,11 @@ const client_home_get = (req,res,next) => {
 }
 const client_productDetails_get = (req,res) => {
     allProducts.findById(req.params.id).then((result) => {
-        res.render("productDetailsClient",{pageName:result.title,product:result})
+        res.render("productDetailsClient",{
+            pageName:result.title,
+            product:result,
+            msg_lastPopup:req.flash("last-popup")[0]
+        })
     }).catch(err => console.log(err))
 }
 
@@ -48,6 +52,7 @@ const client_productDetails_post = (req,res) => {
             status: [{statue:"pending",in: addIn}],
             addedIn: addIn
           }).save().then((result) => {
+            req.flash("last-popup","Successful order") 
             res.redirect(`/${req.body.productId}`)
           }).catch(err => console.log(err))
     }).catch(err => console.log(err))

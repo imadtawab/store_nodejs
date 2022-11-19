@@ -104,4 +104,21 @@
         </div>
     </form>
 </section>
+            <!--  Start Last Popup -->
+            
+            <% if(msg_lastPopup){ %> 
+                <div class="container-last-popup">
+                    <div class="par-popup">
+                        <div class="last-popup">
+                            <div class="p-action"><%= msg_lastPopup %></div>
+                            <div class="icon-check">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                        <a href="/"><i class="fa-solid fa-home"></i>Home</a>
+                        <div class="cancel">Cancel</div>
+                    </div>
+                </div>
+           <% } %> 
+            <!--  End Last Popup -->
 <%- include("./partials/clientPartials/bottom.ejs") %> 

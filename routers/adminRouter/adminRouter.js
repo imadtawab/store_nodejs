@@ -8,11 +8,11 @@ const multer = require("multer")
 // const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
 // Auth
 const auth = require("../../models/guard_auth")
-// flash
-const flash = require("connect-flash")
+// // flash
+// const flash = require("connect-flash")
 
-// use
-route.use(flash())
+// // use
+// route.use(flash())
 
 // Controllers
 const {admin_addNewProduct_get,

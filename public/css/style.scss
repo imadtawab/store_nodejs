@@ -1963,3 +1963,76 @@ section.modal {
     }
   }
 }
+
+
+.container-last-popup{
+  .last-popup{
+    animation: last-popup 3s 1 forwards;
+    position: fixed;
+    left: 50%;
+    top: -50%;
+    transform: translate(-50%, 0%);
+    background: #6edb56;
+    color: #fff;
+    font-weight: bold;
+    padding: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    white-space: nowrap;
+    box-shadow: 0px 0px 10px 0px #00000099;
+    border: 2px solid #0000000d;
+    &.delete{
+      background-color: #dc3545 !important;
+    }
+    .p-action{
+
+    }
+
+    .icon-check{
+      border: 4px solid;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 30px;
+      i{
+
+      }
+    }
+  }
+}
+
+@keyframes last-popup {
+  0%{
+    top: -50%;
+  }
+  7%{
+    top:30px;
+  }
+  13%{
+    top: 20px;
+  }
+  15%{
+    top: 30px;
+  }
+  17%{
+    top: 25px;
+  }
+  20%{
+    top: 30px;
+    opacity: 1;
+  }
+  95%{
+    top: 30px;
+    opacity: 1;
+  }
+  99%{
+    opacity: .8;
+  }
+  100%{
+    top: -50%;
+  }
+}

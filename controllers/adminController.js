@@ -89,7 +89,11 @@ const bcrypt = require("bcrypt")
 // Controllers Functions
 const admin_addNewProduct_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
-        res.render("addNewProduct",{pageName:"Add Product",user:user})
+        res.render("addNewProduct",{
+            pageName:"Add Product",
+            user:user,
+            msg_lastPopup:req.flash("last-popup")[0]
+        })
     }).catch(err => console.log(err))
 }
 const admin_addNewProduct_post = (req,res) => {
@@ -116,15 +120,22 @@ const admin_addNewProduct_post = (req,res) => {
         addedIn: `${checkDate(date.getFullYear())}-${checkDate(date.getMonth() + 1)}-${checkDate(date.getDate())} ${checkDate(date.getHours())}:${checkDate(date.getMinutes())}`
       }).save()
     .then((result) => {
-    // console.log(result,"saved !!")  
-      res.redirect("/admin/addNewProduct")
+    // console.log(result,"saved !!") 
+        req.flash("last-popup","Product Added ...") 
+        res.redirect("/admin/addNewProduct")
     })
 }
 
 const admin_allProducts_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
         allProducts.find().then((result) => {
-            res.render("allProducts",{pageName:"MyProduct",allProducts:result,user:user})
+            res.render("allProducts",{
+                pageName:"MyProduct",
+                allProducts:result,
+                user:user,
+                msg_lastPopup:req.flash("last-popup")[0],
+                msg_lastPopup_delete:req.flash("last-popup_delete")[0]
+            })
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 } 
@@ -132,6 +143,7 @@ const admin_allProducts_get = (req,res) => {
 const admin_allProduct_delete = (req,res) => {
     allProducts.deleteOne({_id:req.params.id}).then((result) => {
         // console.log(result,"delete !!")
+        req.flash("last-popup_delete","Product Delete ...") 
         res.redirect("/admin/allproducts")
     }).catch(err => console.log(err))
 }
@@ -146,7 +158,12 @@ const admin_productDetails_get = (req,res) => {
 const admin_allOrders_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
         allOrders.find().then((orders) => {
-                res.render("allOrders",{pageName:"All Orders",allOrders:orders,user:user})
+                res.render("allOrders",{pageName:"All Orders",
+                allOrders:orders,
+                user:user,
+                msg_lastPopup_delete:req.flash("last-popup_delete")[0],
+                msg_lastPopup:req.flash("last-popup")[0]
+            })
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
 } 
@@ -161,6 +178,7 @@ const admin_dashboard_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
         allOrders.find().then((orders) => {
             visitor.find().then((visitors) => {
+                console.log(":::::::::::::::::::::::::::::::::::::");
                 res.render("dashboard",{pageName:"All Orders",allOrders:orders,user:user,visitors:visitors.length})
             }).catch(err => console.log(err))
                 
@@ -170,14 +188,18 @@ const admin_dashboard_get = (req,res) => {
 }
 const admin_allOrders_delete =  (req,res) => {
     allOrders.deleteOne({_id:req.params.id}).then((result) => {
-        console.log(result,"delete !!")
+        req.flash("last-popup_delete","Order Delete ...") 
         res.redirect("/admin/orders")
     }).catch(err => console.log(err))
 }
 const admin_UpdateProduct_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
         allProducts.findById(req.params.id).then((product) => {
-            res.render("updateProduct",{pageName:"Update product",product:product,user:user})
+            res.render("updateProduct",{
+                pageName:"Update product",
+                product:product,
+                user:user
+            })
         })
     }).catch(err => console.log(err))
 }
@@ -199,6 +221,7 @@ const admin_UpdateProduct_post = (req,res) => {
         status: req.body.status,
         addedIn: `${checkDate(date.getFullYear())}-${checkDate(date.getMonth() + 1)}-${checkDate(date.getDate())} ${checkDate(date.getHours())}:${checkDate(date.getMinutes())}`
       }).then((result) => {
+        req.flash("last-popup","Product Update ...") 
         res.redirect('/admin/allproducts')
     })
 }
@@ -206,6 +229,7 @@ const admin_ProductChangeStatus_get = (req,res) => {
     allProducts.updateOne({_id:req.query.id},{
         status: req.query.status,
       }).then((result) => {
+        req.flash("last-popup","Status Changed ...") 
         res.redirect('/admin/allproducts')
     })
 }
@@ -222,6 +246,7 @@ const admin_ordersChangeStatus_get = (req,res) => {
         allOrders.updateOne({_id:req.query.id},{
             status: oldStatus
         }).then((result) => {
+            req.flash("last-popup","Status Changed ...") 
             res.redirect('/admin/orders')
         }).catch(err => console.log(err))
     }).catch(err => console.log(err))
@@ -295,7 +320,11 @@ const admin_logout_get = (req,res) => {
 
 const admin_profile_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
-        res.render("profile",{pageName:"Profile",user:user})
+        res.render("profile",{
+            pageName:"Profile",
+            user:user,
+            msg_lastPopup:req.flash("last-popup")[0]
+        })
     }).catch(err => console.log(err))
 }
 
@@ -304,6 +333,7 @@ const admin_profile_updateImage_post = (req,res) => {
     registerAccount.updateOne({_id:req.session.userId},{
         image:req.file.filename
     }).then((user) => {
+        req.flash("last-popup","Image Updated") 
         res.redirect("/admin/profile")
     }).catch(err => console.log(err))
 }
@@ -311,6 +341,7 @@ const admin_profile_updateuserName_post = (req,res) => {
     registerAccount.updateOne({_id:req.session.userId},{
         userName:req.body.userName
     }).then((user) => {
+        req.flash("last-popup","UserName Updated") 
         res.redirect("/admin/profile")
     }).catch(err => console.log(err))
 }
@@ -318,6 +349,7 @@ const admin_profile_updateEmail_post = (req,res) => {
     registerAccount.updateOne({_id:req.session.userId},{
         email:req.body.email
     }).then((user) => {
+        req.flash("last-popup","Email Changed") 
         res.redirect("/admin/profile")
     }).catch(err => console.log(err))
 }
@@ -326,6 +358,7 @@ const admin_profile_updatePassword_post = (req,res) => {
                 registerAccount.updateOne({_id:req.session.userId},{
                     password:hPass,
                 }).then((user) => {
+                    req.flash("last-popup","Password Changed") 
                     res.redirect("/admin/profile")
                 }).catch(err => console.log(err))
         }).catch(err => console.log(err))

@@ -22,6 +22,11 @@ mongoose.connect(process.env.URL_DB,{useNewUrlParser:true,useUnifiedTopology:tru
     // })
 }).catch(err => console.log(err))
 
+
+// flash
+const flash = require("connect-flash")
+// use
+app.use(flash())
 // 
 app.use(helmet()); 
 // statics folder
