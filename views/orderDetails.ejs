@@ -1,0 +1,110 @@
+<%- include("./partials/adminPartials/top.ejs") %> 
+<h1>Product Details</h1>
+                <div class="new-content">
+                    <div class="container-widget">
+                        <div class="widget status">
+                            <h4>Status Timeline</h4>
+                            <section class="par-status">
+                                <!-- <article class="confirmed">
+                                    <h6>confirmed</h6>
+                                    <p>2022-10-18 11:23</p>
+                                </article> -->
+                                <% order.status.forEach((status) => { %>
+                                    <article class="<%= status.statue %>">
+                                        <h6><%= status.statue %></h6>
+                                        <p><%= status.in %></p>
+                                    </article>
+                                <% }) %> 
+                                
+                            </section>
+                        </div>
+                        <div class="widget custom-information">
+                            <h4>Customer information</h4>
+                            <section>
+                                <article>
+                                    <i class="fa-solid fa-user"></i>
+                                    <div><%= order.fullName %></div>
+                                </article>
+                                <article>
+                                    <a href="tel:<%= order.phone %>">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <div><%= order.phone %></div>
+                                    </a>
+                                </article>
+                                <article>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                        <div><%= order.city %></div>
+                                </article>
+                                
+                                <article>
+                                    <i class="fa-solid fa-map"></i>
+                                        <div class="address"><%= order.address %> ,</div>
+                                </article>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="widget products-order">
+                        <h4>Products order</h4>
+                        <section class="table-container">
+                            <table>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                                <tr>
+                                    <td class="image">
+                                        <img src="/uploads/<%= order.product.images[0] %>" alt="">
+                                    </td>
+                                    <td class="product">
+                                        <div class="name"><%= order.product.title %></div>
+                                        <p>
+                                            <% if(order.color) { %>
+                                                <span style="--c:<%= order.color %>" class="color"></span>
+                                            <% } %> 
+                                            <% if(order.clothe_size) { %>
+                                                <span> - <%= order.clothe_size %></span>
+                                            <% } %>
+                                            <% if(order.shoe_size) { %>
+                                                <span> - <%= order.shoe_size %></span>
+                                            <% } %>
+                                        </p>
+                                    </td>
+                                    <td class="quantite"><%= order.quantite %></td>
+                                    <td class="price"><%= order.product.price %><span>MAD</span></td>
+                                    <td class="total"><%= order.total %><span>MAD</span></td>
+                                    <td  class="action">
+                                        <a href="/admin/allProducts/<%= order.product._id %> ">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
+                    </div>
+                    <div class="widget information-order">
+                        <h4>Information order</h4>
+                        <section>
+                            <article>
+                                <h5>Subtotal</h5>
+                                <div class="number"><%= order.total %><span>MAD</span></div>
+                            </article>
+                            <article>
+                                <h5>Shipping</h5>
+                                <div class="number">0.00<span>MAD</span></div>
+                            </article>
+                            <article>
+                                <h5>Discount</h5>
+                                <div class="number discount">- 0<span>MAD</span></div>
+                            </article>
+                            <article>
+                                <h5>Products total</h5>
+                                <div class="number total"><%= order.total %><span>MAD</span></div>
+                            </article>
+                        </section>
+                    </div>
+                </div>
+<%- include("./partials/adminPartials/bottom.ejs") %> 

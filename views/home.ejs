@@ -1,0 +1,30 @@
+<%- include("./partials/clientPartials/top.ejs") %> 
+        <h1>Featured products</h1>
+        <section class="cards">
+            <% allProducts.forEach((product) => { %>
+                <% if(product.status == "publish"){ %>
+                    <div class="mycard">
+                        <% if(product.discount && product.discount != "0"){ %>
+                            <span class="discount">-<%= product.discount %> %</span>
+                        <%} %> 
+                        
+                        <div class="product-img">
+                            <a href="/<%= product._id %>">
+                                <img src="/uploads/<%= product.images[0] %>" alt="">
+                            </a>
+                        </div>
+                        <h4 class="product-name"><%= product.title %></h4>
+                        <div class="product-price">
+                            <div class="new-price"><%= product.price %><span>MAD</span></div>
+                            <% if(product.sub_price && product.sub_price != "0"){ %>
+                                <div class="old-price"><%= product.sub_price %> <span>MAD</span></div>
+                            <%} %> 
+                            
+                            
+                        </div>
+                        <a href="/<%= product._id %>" class="buy">View Details</a>
+                    </div>
+                <% } %>     
+            <% }) %> 
+        </section>
+<%- include("./partials/clientPartials/bottom.ejs") %> 
