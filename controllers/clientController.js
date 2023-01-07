@@ -1,5 +1,6 @@
 const allProducts = require("../models/addProductSchema")
 const allOrders = require("../models/newOrderSchema")
+const registerAccount = require("../models/registerSchema")
 // const visitor = require("../models/numberVisitors")
 
 // ##############################
@@ -39,6 +40,7 @@ const client_productDetails_post = (req,res) => {
     let addIn = `${checkDate(date.getFullYear())}-${checkDate(date.getMonth() + 1)}-${checkDate(date.getDate())} ${checkDate(date.getHours())}:${checkDate(date.getMinutes())}`
     allProducts.findById(req.body.productId).then((product) => {
         new allOrders({
+            userID: product.userID,
             product: product,
             fullName: req.body.fullName,
             phone: req.body.phone,
@@ -52,7 +54,17 @@ const client_productDetails_post = (req,res) => {
             status: [{statue:"pending",in: addIn}],
             addedIn: addIn
           }).save().then((result) => {
-            req.flash("last-popup","Successful order") 
+            // console.log(result + "eeeeeeeeeeeeeeee")
+            registerAccount.findById(result.userID).then((user) => {
+                let arrOrder = user.newOrder
+                arrOrder.push(result.product)
+                registerAccount.updateOne({id: user._id},{
+                    newOrder: arrOrder
+                }).then((doc) => {
+                    console.log(doc + "user Order Update ............");
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+            req.flash("last-popup","Successful order")
             res.redirect(`/${req.body.productId}`)
           }).catch(err => console.log(err))
     }).catch(err => console.log(err))

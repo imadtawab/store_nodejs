@@ -85,12 +85,16 @@
             <div class="over-shadow"></div>
             <header>
                 <i class="open-sidebar fa-solid fa-bars"></i>
-                <form>
+                <!-- <form>
                     <i class="fa-solid fa-search"></i>
                     <input type="search" name="" id="">
-                </form>
+                </form> -->
                 <div class="icons">
-                    <i class="fa-regular fa-bell active"></i>
+                    <% if(user.newOrder.length > 0){ %> 
+                        <i style="--numOrder: '<%= user.newOrder.length %>'" class="fa-regular fa-bell active"></i>
+                    <% }else{ %> 
+                        <i class="fa-regular fa-bell"></i>
+                    <% } %> 
                     <div class="par-menu-img">
                         <!-- <img src="/images/OIP.jpg" alt=""> -->
                         <% if(user.image){ %>

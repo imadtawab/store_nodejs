@@ -5,5 +5,4 @@ let auth = (req,res,next) => {
         res.redirect("/admin/login")
     }
 }
-
-module.exports = auth
+module.exports = {auth}

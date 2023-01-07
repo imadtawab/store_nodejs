@@ -53,7 +53,7 @@
           <th>Actions</th>
         </tr>
         <% let showOrders %> 
-        <% allOrders.length < 5 ? showOrders=allOrders.length : 5 %> 
+        <% allOrders.length < 5 ? showOrders=allOrders.length : showOrders=5 %> 
         <% for (let i = showOrders - 1; i + 1 > 0; i--) { %>
           <% let order = allOrders[i] %> 
           <% console.log(order) %> 

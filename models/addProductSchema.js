@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const allProductsSchema = new Schema({
+  userID: String ,
   type: {
     type: String,
     required: true,
@@ -27,6 +28,10 @@ const allProductsSchema = new Schema({
     trim: true,
   },
   discount: {
+    type: String,
+    trim: true,
+  },
+  shipping: {
     type: String,
     trim: true,
   },

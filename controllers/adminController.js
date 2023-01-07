@@ -7,6 +7,7 @@ const registerAccount = require("../models/registerSchema")
 const visitor = require("../models/numberVisitors")
 // bcrypt
 const bcrypt = require("bcrypt")
+const {auth} = require("../models/guard_auth")
 
 
 // nodemailer
@@ -105,30 +106,36 @@ const admin_addNewProduct_post = (req,res) => {
     function checkDate(mydate) {
         return mydate > 9 ? mydate : "0"+mydate
     }
-    new allProducts({
-        type: req.body.type,
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price,
-        sub_price: req.body.sub_price,
-        discount: req.body.discount,
-        images: imagesArray,
-        shoes_size: req.body.shoes_size,
-        colors: req.body.colors,
-        clothes_size: req.body.clothes_size,
-        status: req.body.status,
-        addedIn: `${checkDate(date.getFullYear())}-${checkDate(date.getMonth() + 1)}-${checkDate(date.getDate())} ${checkDate(date.getHours())}:${checkDate(date.getMinutes())}`
-      }).save()
-    .then((result) => {
-    // console.log(result,"saved !!") 
-        req.flash("last-popup","Product Added ...") 
-        res.redirect("/admin/addNewProduct")
-    })
+
+    registerAccount.findById(req.session.userId).then((user) => {
+        new allProducts({
+            userID: user._id,
+            type: req.body.type,
+            title: req.body.title,
+            description: req.body.description,
+            price: req.body.price,
+            sub_price: req.body.sub_price,
+            discount: req.body.discount,
+            shipping: req.body.shipping,
+            images: imagesArray,
+            shoes_size: req.body.shoes_size,
+            colors: req.body.colors,
+            clothes_size: req.body.clothes_size,
+            status: req.body.status,
+            addedIn: `${checkDate(date.getFullYear())}-${checkDate(date.getMonth() + 1)}-${checkDate(date.getDate())} ${checkDate(date.getHours())}:${checkDate(date.getMinutes())}`
+          }).save()
+          .then((result) => {
+          console.log(result,"saved !!") 
+              req.flash("last-popup","Product Added ...") 
+              res.redirect("/admin/addNewProduct")
+          }).catch(err => console.log(err))
+    }) .then((result) => {}).catch(err => console.log(err))
 }
 
 const admin_allProducts_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
-        allProducts.find().then((result) => {
+        allProducts.find({userID: user._id}).then((result) => {
+            // console.log(result , "dddddddd" ,req.session.id , "dddddddddddddddddddd")
             res.render("allProducts",{
                 pageName:"MyProduct",
                 allProducts:result,
@@ -137,6 +144,7 @@ const admin_allProducts_get = (req,res) => {
                 msg_lastPopup_delete:req.flash("last-popup_delete")[0]
             })
         }).catch(err => console.log(err))
+
     }).catch(err => console.log(err))
 } 
 
@@ -157,7 +165,7 @@ const admin_productDetails_get = (req,res) => {
 }
 const admin_allOrders_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
-        allOrders.find().then((orders) => {
+        allOrders.find({userID: user._id}).then((orders) => {
                 res.render("allOrders",{pageName:"All Orders",
                 allOrders:orders,
                 user:user,
@@ -176,7 +184,7 @@ const admin_orderDetails_get = (req,res) => {
 }
 const admin_dashboard_get = (req,res) => {
     registerAccount.findById(req.session.userId).then((user) => {
-        allOrders.find().then((orders) => {
+        allOrders.find({userID: user._id}).then((orders) => {
             visitor.find().then((visitors) => {
                 console.log(":::::::::::::::::::::::::::::::::::::");
                 res.render("dashboard",{pageName:"All Orders",allOrders:orders,user:user,visitors:visitors.length})
@@ -215,6 +223,7 @@ const admin_UpdateProduct_post = (req,res) => {
         price: req.body.price,
         sub_price: req.body.sub_price,
         discount: req.body.discount,
+        shipping: req.body.shipping,
         shoes_size: req.body.shoes_size,
         colors: req.body.colors,
         clothes_size: req.body.clothes_size,

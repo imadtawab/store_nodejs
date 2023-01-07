@@ -7,7 +7,7 @@ const multer = require("multer")
 // Url DB 
 // const URL_DB = "mongodb+srv://imadtawab:azertyuiop@cluster0.4inwqai.mongodb.net/mystore?retryWrites=true&w=majority"
 // Auth
-const auth = require("../../models/guard_auth")
+const {auth} = require("../../models/guard_auth")
 // // flash
 // const flash = require("connect-flash")
 

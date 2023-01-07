@@ -425,7 +425,7 @@ a {
 }
 .page .main-content header {
   background-color: #fff;
-  padding: 10px 25px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -434,7 +434,7 @@ a {
   *****************************/
 }
 .page .main-content header .open-sidebar {
-  font-size: 22px;
+  font-size: 25px;
   cursor: pointer;
 }
 .page .main-content header form {
@@ -465,21 +465,27 @@ a {
   align-items: center;
 }
 .page .main-content header .icons i {
-  font-size: 20px;
-  margin: 0 10px;
+  font-size: 25px;
+  margin: 0 20px;
+  cursor: pointer;
 }
 .page .main-content header .icons i.active {
   position: relative;
 }
 .page .main-content header .icons i.active::after {
-  content: "";
+  content: var(--numOrder);
   position: absolute;
-  right: 0;
-  top: 0px;
-  width: 10px;
-  height: 10px;
+  right: -5px;
+  top: -2px;
   background: red;
   border-radius: 50%;
+  font-size: 11px;
+  display: grid;
+  place-content: center;
+  min-width: 15px;
+  min-height: 15px;
+  font-weight: bold;
+  color: #fff;
 }
 .page .main-content header .icons .par-menu-img {
   position: relative;
@@ -488,8 +494,8 @@ a {
   cursor: pointer;
   border-radius: 50%;
   background-image: url(/images/OIP.jpg);
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -498,11 +504,11 @@ a {
 }
 .page .main-content header .icons .par-menu-img .menu {
   position: absolute;
-  right: 0;
+  right: 3px;
   background: #fff;
   box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.368627451);
   border-radius: 5px;
-  top: 50px;
+  top: 60px;
   display: none;
   opacity: 0;
   transition: opacity 0.3s;
@@ -599,47 +605,32 @@ a {
   margin: auto;
 }
 .page .main-content .container .box.box-price {
+  all: unset;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  max-width: 480px;
+  margin: auto;
+}
+.page .main-content .container .box.box-price .min-box .par-input {
+  border: 2px solid #6f7173;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #f2f2f2;
+  transition: box-shadow 0.3s;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  flex-direction: row !important;
-  gap: 5px !important;
+  margin-top: 5px;
 }
-.page .main-content .container .box.box-price .min-box {
-  width: 70px;
-  flex: 1;
-  position: relative;
+.page .main-content .container .box.box-price .min-box .par-input input {
+  all: unset;
+  width: 100%;
 }
-.page .main-content .container .box.box-price .min-box.discount input {
-  padding-left: 22px;
-}
-.page .main-content .container .box.box-price .min-box.discount:before {
-  content: "-";
-  position: absolute;
-  bottom: 7px;
-  left: 8px;
-  font-weight: bold;
-}
-.page .main-content .container .box.box-price .min-box.discount::after {
-  content: "%";
-  padding-right: 8px;
-}
-.page .main-content .container .box.box-price .min-box.price::after, .page .main-content .container .box.box-price .min-box.sub_price::after {
-  content: "MAD";
-}
-.page .main-content .container .box.box-price .min-box:after {
-  position: absolute;
-  right: 6px;
-  font-weight: bold;
-  bottom: 2px;
-  background: #f2f2f2;
-  line-height: 34px;
-  width: 40px;
-  text-align: end;
+.page .main-content .container .box.box-price .min-box .par-input span {
   color: #444;
   font-size: 15px;
-}
-.page .main-content .container .box.box-price .min-box input {
-  margin-top: 5px;
-  max-width: 100%;
+  font-weight: bold;
 }
 .page .main-content .container .box select {
   opacity: 1;
