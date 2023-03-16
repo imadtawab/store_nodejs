@@ -45,6 +45,7 @@ const allProductsSchema = new Schema({
     required: true,
     trim: true,
   },
+  quantite: String,
   colors: {
     type: Array,
     required: true,

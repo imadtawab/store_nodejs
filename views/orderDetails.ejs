@@ -1,5 +1,5 @@
 <%- include("./partials/adminPartials/top.ejs") %> 
-<h1>Product Details</h1>
+<h1>Order Details</h1>
                 <div class="new-content">
                     <div class="container-widget">
                         <div class="widget status">
@@ -55,12 +55,13 @@
                                     <th>Total</th>
                                     <th>Actions</th>
                                 </tr>
+                                <% order.products.forEach((product) => { %>    
                                 <tr>
                                     <td class="image">
-                                        <img src="/uploads/<%= order.product.images[0] %>" alt="">
+                                        <img src="/uploads/<%= product.images[0] %>" alt="">
                                     </td>
                                     <td class="product">
-                                        <div class="name"><%= order.product.title %></div>
+                                        <div class="name"><%= product.title %></div>
                                         <p>
                                             <% if(order.color) { %>
                                                 <span style="--c:<%= order.color %>" class="color"></span>
@@ -73,15 +74,16 @@
                                             <% } %>
                                         </p>
                                     </td>
-                                    <td class="quantite"><%= order.quantite %></td>
-                                    <td class="price"><%= order.product.price %><span>MAD</span></td>
-                                    <td class="total"><%= order.total %><span>MAD</span></td>
+                                    <td class="quantite"><%= product.quantite ? product.quantite : order.quantite %></td>
+                                    <td class="price"><%= product.price %><span>MAD</span></td>
+                                    <td class="total"><%= product.quantite ? product.price * product.quantite : product.price * order.quantite  %><span>MAD</span></td>
                                     <td  class="action">
-                                        <a href="/admin/allProducts/<%= order.product._id %> ">
+                                        <a href="/admin/allProducts/<%= product._id %> ">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                <% }) %>
                             </table>
                         </section>
                     </div>
@@ -90,16 +92,24 @@
                         <section>
                             <article>
                                 <h5>Subtotal</h5>
-                                <div class="number"><%= order.total %><span>MAD</span></div>
+                                <% let totShipp = 0 %>
+                                <% order.products.forEach(prod => {totShipp += +prod.shipping}) %>
+                                <div class="number"><%= order.total - totShipp %><span>MAD</span></div>
                             </article>
-                            <article>
+                            <article class="product-lists">
                                 <h5>Shipping</h5>
-                                <div class="number">0.00<span>MAD</span></div>
+                                    <ul>
+                                        <% order.products.forEach((product) => { %> 
+                                            <li>
+                                                <div class="title"><%= product.title %></div>
+                                                <div class="number"><%= product.shipping %><span>MAD</span></div>
+                                            </li>
+                                        <% }) %>
                             </article>
-                            <article>
+                            <!-- <article>
                                 <h5>Discount</h5>
                                 <div class="number discount">- 0<span>MAD</span></div>
-                            </article>
+                            </article> -->
                             <article>
                                 <h5>Products total</h5>
                                 <div class="number total"><%= order.total %><span>MAD</span></div>

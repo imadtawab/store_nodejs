@@ -1,0 +1,20 @@
+<%- include("./partials/adminPartials/login_register_top.ejs") %> 
+<% if (confirmAcount) { %>
+    <main class="container">
+    <div class="widget confirmAccountPage success">
+      <i class="fa-solid fa-check"></i>
+      <h4>Confirm account succefully</h4>
+      <p>for connect to your account , <a href="/admin/login">click here </a></p>
+    </div>
+  </main>
+<% } else { %>
+    <main class="container">
+    <div class="widget confirmAccountPage failed">
+      <i class="fa-solid fa-close"></i>
+      <h4>Please check your mailbox</h4>
+      <p>for verify your account .</p>
+    </div>
+  </main>
+<% } %>
+
+<%- include("./partials/adminPartials/login_register_bottom.ejs") %> 

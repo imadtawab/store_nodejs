@@ -7,19 +7,35 @@ a {
 }
 
 header {
-  padding: 12px 20px;
+  padding: 0px 20px;
   border-bottom: 2px solid #eee;
   display: flex;
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
   align-items: center;
+  min-height: 70px;
 }
 header .logo {
-  width: 145px;
+  width: 150px;
+  max-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
-header .logo img {
-  opacity: 1;
+header .logo a {
+  text-decoration: none;
+}
+header .logo a img {
+  max-width: 150px;
+  max-height: 70px;
+}
+header .logo a h1.storeName {
+  font-family: "Charm", cursive;
+  color: #222;
+  text-transform: capitalize;
+  font-weight: 700;
+  margin: 0;
 }
 header nav {
   display: flex;
@@ -54,9 +70,98 @@ header nav a span {
   font-family: system-ui;
 }
 
+.dn {
+  display: none;
+}
+
+main.container .select-filter {
+  padding-top: 25px;
+  display: flex;
+  max-width: 800px;
+  margin: auto;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+main.container .select-filter .container-filter {
+  max-width: 800px;
+  display: flex;
+  gap: 5px;
+  margin: auto;
+  flex: 10;
+  flex-wrap: wrap-reverse;
+}
+main.container .select-filter .container-filter select {
+  background: #2196f3;
+  font-weight: bold;
+  font-size: 21px;
+  color: #fff;
+  border: none;
+  height: 60px;
+  padding: 0 12px;
+  outline: none;
+  flex: 1;
+}
+main.container .select-filter .container-filter select option {
+  background: white;
+  color: #444;
+  font-size: 18px;
+}
+main.container .select-filter .container-filter .search-input {
+  position: relative;
+  background: rgba(251, 251, 251, 0.4196078431);
+  height: 60px;
+  flex: 4;
+  border: 2px solid #EEE;
+  min-width: 237px;
+  font-size: 18px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  padding-left: 17px;
+}
+main.container .select-filter .container-filter .search-input input {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  padding-left: 17px;
+}
+main.container .select-filter .container-filter .search-input .menu-search-name {
+  position: absolute;
+  background: #fbfbfb;
+  background: white;
+  width: 100%;
+  left: 0;
+  top: 62px;
+  z-index: 1111;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1294117647);
+}
+main.container .select-filter .container-filter .search-input .menu-search-name .search-name {
+  border-bottom: 2px solid rgba(238, 238, 238, 0.5490196078);
+  padding: 9px 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+main.container .select-filter .container-filter .search-input .menu-search-name .search-name:hover {
+  background: #f3f3f3;
+}
+main.container .select-filter .submit-filter {
+  display: grid;
+  place-content: center;
+  background: #2196f3;
+  font-weight: bold;
+  font-size: 21px;
+  color: #fff;
+  border: none;
+  height: 60px;
+  padding: 0 12px;
+  outline: none;
+  flex: 1;
+  min-width: 150px;
+  cursor: pointer;
+}
 main.container h1 {
   position: relative;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
   margin: 10px auto 25px;
@@ -75,7 +180,7 @@ main.container h1::before {
 }
 main.container section.cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
   gap: 10px;
 }
 main.container section.cards .mycard {
@@ -89,6 +194,26 @@ main.container section.cards .mycard {
   max-width: 300px;
   margin: auto;
   width: -webkit-fill-available;
+}
+main.container section.cards .mycard .heart i {
+  background: rgba(0, 0, 0, 0.1882352941);
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+main.container section.cards .mycard .heart.active i {
+  color: #ff5050;
+  background: #fff;
+  animation: heart 0.6s 1;
 }
 main.container section.cards .mycard .discount {
   position: absolute;
@@ -147,7 +272,40 @@ main.container section.cards .mycard .buy {
   background: rgb(46, 138, 209);
   display: block;
   padding: 11px;
-  margin-top: 5px;
+}
+main.container section.cards .mycard .card-footer {
+  display: flex;
+}
+main.container section.cards .mycard .card-footer a, main.container section.cards .mycard .card-footer .add-shopping-card {
+  text-decoration: none;
+  font-weight: bold;
+  color: #fdfdfd;
+  background: rgb(46, 138, 209);
+  display: block;
+  padding: 11px;
+  flex: 1;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+main.container section.cards .mycard .card-footer a:hover, main.container section.cards .mycard .card-footer .add-shopping-card:hover {
+  opacity: 0.9;
+}
+main.container section.cards .mycard .card-footer a:active, main.container section.cards .mycard .card-footer .add-shopping-card:active {
+  transform: scale(0.95);
+}
+main.container section.cards .mycard .card-footer .add-shopping-card {
+  background-color: #2ed13a;
+  position: relative;
+  overflow: hidden;
+}
+main.container section.cards .mycard .card-footer .add-shopping-card i::before {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+}
+main.container section.cards .mycard .card-footer .add-shopping-card.added i::before {
+  animation: added 2s 1;
 }
 
 main .product-details {
@@ -357,10 +515,6 @@ main .product-details .info .client-info label input::-moz-placeholder {
   color: #cacaca;
   font-weight: bold;
 }
-main .product-details .info .client-info label input:-ms-input-placeholder {
-  color: #cacaca;
-  font-weight: bold;
-}
 main .product-details .info .client-info label input::placeholder {
   color: #cacaca;
   font-weight: bold;
@@ -473,8 +627,7 @@ section.description p {
   border-radius: 10px;
   padding: 15px;
   min-width: 340px;
-  -webkit-animation: last-popup 0.7s 1 forwards;
-          animation: last-popup 0.7s 1 forwards;
+  animation: last-popup 0.7s 1 forwards;
 }
 .container-last-popup .par-popup .last-popup {
   background: #6edb56;
@@ -527,7 +680,7 @@ section.description p {
   color: #666666;
 }
 
-@-webkit-keyframes last-popup {
+@keyframes last-popup {
   0% {
     transform: scale(0);
   }
@@ -541,18 +694,57 @@ section.description p {
     transform: scale(1);
   }
 }
-
-@keyframes last-popup {
+@keyframes added {
   0% {
-    transform: scale(0);
+    transform: translate(-50%, -50%);
+    opacity: 1;
   }
-  30% {
-    transform: scale(1.1);
+  10% {
+    transform: translate(-120%, -50%);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(-200%, -55%) rotate(-36deg);
+    opacity: 1;
   }
   60% {
-    transform: scale(0.9);
+    transform: translate(1000%, -50%);
+    opacity: 1;
+  }
+  61% {
+    opacity: 0;
+  }
+  62% {
+    transform: translate(-1000%, -50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+@keyframes heart {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.5);
+    background-color: #ff5050;
+    color: #fff;
+  }
+  60% {
+    transform: scale(1.5);
+    background-color: #ff5050;
+    color: #fff;
+  }
+  80% {
+    transform: scale(0.75);
+    background-color: #ff5050;
+    color: #fff;
   }
   100% {
     transform: scale(1);
+    background-color: #ff5050;
+    color: #fff;
   }
 }/*# sourceMappingURL=client.css.map */

@@ -3,11 +3,17 @@ const Schema = mongoose.Schema;
 
 const registerSchema = new Schema({
   newOrder: Array,
-   userName: {
+  userName: {
     type: String,
     required: true,
     trim: true,
   },
+  storeName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  storeLogo: String,
   email: {
     type: String,
     required: true,
@@ -19,7 +25,13 @@ const registerSchema = new Schema({
     trim: true,
   },
   image: String,
-  addedIn: String
+  addedIn: String,
+  isActive: {
+    type: Boolean,
+    default: false
+  },
+  activationCode: String,
+  forgotPasswordCode: String
 });
 
 const registerAccount = mongoose.model("register_Account", registerSchema);

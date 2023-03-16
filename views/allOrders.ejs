@@ -6,18 +6,58 @@
     <section class="head">
       <h4>Orders</h4>
       <div class="buttons">
-          <button id="filter"><i class="fa-solid fa-filter"></i> Filter</button>
+        
+        <button data-modal="updateManyModal" id="updateMany" class="bg-green"disabled><i class="fa-solid fa-pen"></i> Update Many 
+          <select disabled class="bg-green">
+          <% let orderStatus_update = ["confirmed","prepared","shipped","delivered","paid","outofstock","unreached","canceled","refused","awaiting_return","returned","pending"] %>
+          <option id="defaultValue" value="status" disabled selected>Status : </option>
+          <% orderStatus_update.forEach((statue) =>{ %>
+              <!-- <div data-status="<%=// statue %>" class="option <%=// statue %>"><%=// statue %></div> -->
+              <option value="<%= statue %>"><%= statue %></option>
+              <% }) %> 
+        </select>
+      </button>
+        <button data-modal="deleteManyModal" id="deleteMany" class="bg-red" disabled><i class="fa-solid fa-trash-can"></i> Delete</button>
+        <button id="filter" class="bg-blue"><i class="fa-solid fa-filter"></i> Filter</button>
       </div>
   </section>
     <!-- <h4>Orders</h4> -->
   <form action="" class="select-filter">
-    <section class="container-filter">
-      <div class="search-box">
-        <label for="searchByName">Product Name</label>
-        <input type="search" name="" id="searchByName" placeholder="Name">
+    <section class="container-filter" style="margin-bottom: 10px;">
+      <!--  -->
+      <!-- <div class="search-input"> -->
+        <!-- <i class="fa-solid fa-search"></i> -->
+        <!-- <input type="search" name="search" value="<%=// filter.title ? filter.title : "" %>" id="searchByName" placeholder="Search" > -->
+        <!-- <div class="menu-search-name">
+          <%// let searchArray = [] %>
+            <%// allOrders.forEach((order) => { %>
+              <%// order.products.forEach((product) => { %>
+                <%// if(searchArray.indexOf(product.title) == -1){ %>
+                  <%// searchArray.push(product.title) %>
+                  <div class="search-name dn" data-id="<%=// order._id %>"><%=// product.title %></div>
+                <%// } %>
+              <%// }) %>
+            <%// }) %>
+        </div> -->
+    <!-- </div> -->
+    <!--  -->
+    <div class="search-box">
+      <label for="searchByName">Product Name :</label>
+      <input type="search" name="" id="searchByName" placeholder="Name">
+      <div class="menu-search-name" style="left:0;top:0">
+        <% let searchArray = [] %>
+          <% allOrders.forEach((order) => { %>
+            <% order.products.forEach((product) => { %>
+              <% if(searchArray.indexOf(product.title) == -1){ %>
+                <% searchArray.push(product.title) %>
+                <div class="search-name dn" data-id="<%= order._id %>"><%= product.title %></div>
+              <% } %>
+            <% }) %>
+          <% }) %>
       </div>
+    </div>
       <div class="search-box">
-        <label for="searchByStatus">Status</label>
+        <label for="searchByStatus">Status :</label>
         <select name="statusSearch" id="searchByStatus">
           <% let orderStatus = ["all","confirmed","prepared","shipped","delivered","paid","outofstock","unreached","canceled","refused","awaiting_return","returned","pending"] %>
             <% orderStatus.forEach((statue) =>{ %>
@@ -27,7 +67,7 @@
         </select>
       </div>
       <div class="search-box">
-        <label for="searchByCollection">Collection</label>
+        <label for="searchByCollection">Collection :</label>
         <!-- <input type="text" name="" id="searchByStatus"> -->
         <select name="collectionSearch" id="searchByCollection">
             <% ["all","glasses","shoes","accessories","panties","shirts"].forEach((statue) =>{ %>
@@ -36,20 +76,39 @@
               <% }) %> 
         </select>
       </div>
-      <!-- <div class="search-box">
-        <label for=""></label>
-        <button>Search</button>
-      </div> -->
   </section>
+  <section class="container-filter">
+    <div class="search-box">
+        <label for="from_searchByDate">From :</label>
+        <input type="date" name="" id="from_searchByDate">
+      </div>
+      <div class="search-box">
+        <label for="at_searchByDate">At :</label>
+        <input type="date" name="" id="at_searchByDate">
+      </div>
+      
+  <div class="search-box">
+    <button>Search</button>
+  </div>
+</section>
   <!-- <div class="footer-filter">
     <button>Search</button>
   </div> -->
   </form>
-    <section class="table-container">
+    <form method="post" action="/admin/orders/many" id="tableForm" class="table-container">
+      <input type="hidden" name="event" id="event" value="deleteMany">
+      <input type="hidden" name="thisStatusForMany" id="thisStatusForMany">
       <table>
         <tr>
-          <th>#</th>
-          <th>Product</th>
+          <th class="parent-checkbox">
+            <input type="checkbox" name="row" id="parentCheck">
+            <label for="parentCheck">
+              <i class="fa-solid fa-check"></i>
+            </label>
+          </th>
+          <th>Image</th>
+          <th>Products</th>
+          <th>Collection</th>
           <th>Date</th>
           <th>Customer</th>
           <th>Status</th>
@@ -57,17 +116,37 @@
           <th>Actions</th>
         </tr>
 
-        <% allOrders.forEach((order) => { %>
-        <tr class="row-product">
-          <td class="product">
-            <article>
-              <img src="/uploads/<%= order.product.images[0] %> " alt="" />
-            </article>
+        <% allOrders.forEach((order, index) => { %>
+        <tr class="row-product" data-id="<%= order._id %>">
+          <td class="checkbox">
+            <input type="checkbox" name="checkboxForProduct" id="checkbox<%= index %>" value="<%= order._id %>">
+            <label for="checkbox<%= index %>">
+              <i class="fa-solid fa-check"></i>
+            </label>
           </td>
           <td class="product">
             <article>
-              <div class="name"><%= order.product.title %></div>
-              <div class="collection"><%= order.product.type %></div>
+              <% order.products.forEach((oneProd, index) => { %>
+                <img src="/uploads/<%= oneProd.images[0] %> " alt="" style="--top:<%= index * 20 / order.products.length%>px;--left:<%= index * 30 / order.products.length %>px;border: 1px solid #161616;"/>
+              <% }) %>
+            </article>
+          </td>
+          <td class="product">
+            <article class="all-name">
+               <% order.products.forEach((product) => { %> 
+                    <div class="name" style="font-size: 13px;">
+                      <%= product.title %>
+                    </div>
+            <% }) %>
+            </article>
+          </td>
+          <td class="product">
+            <article class="all-collection">
+               <% order.products.forEach((product) => { %> 
+                    <div class="collection" style="font-size: 13px;">
+                      <%= product.type %>
+                    </div>
+            <% }) %>
             </article>
           </td>
           <td class="date"><%= order.addedIn %></td>
@@ -81,11 +160,8 @@
             </article>
           </td>
           <td class="status">
-           
-
-
             <!-- select -->
-            <div class="select <%= order.status[order.status.length-1].statue %>" data-productid="<%= order._id %>" >
+            <div class="select <%= order.status[order.status.length-1].statue %>" data-productid="<%= order._id %>" data-status="<%= order.status[order.status.length-1].statue %>">
               <div class="status">
                   <%= order.status[order.status.length-1].statue %>
                   <i class="fa-sharp fa-solid fa-chevron-down"></i>
@@ -105,13 +181,14 @@
           </td>
           <td class="total"><%=order.total%><span>MAD</span></td>
           <td class="action">
-            <a href="/admin/orders/<%=order._id%>">
-              <i class="fa-solid fa-eye"></i>
-            </a>
-            <% //  <a href="#"><i class="fa-solid fa-pen-to-square"></i></a> %>
-            
-            <div>
-              <i data-modal="delete_<%= order._id %>" class="fa-solid fa-trash-can"></i>
+            <div class="par-action">
+              <a href="/admin/orders/<%=order._id%>">
+                <i class="fa-solid fa-eye"></i>
+              </a>
+              <% //  <a href="#"><i class="fa-solid fa-pen-to-square"></i></a> %>
+              <div>
+                <i data-modal="delete_<%= order._id %>" class="fa-solid fa-trash-can"></i>
+              </div>
             </div>
             <section id="delete_<%= order._id %>" style="--modal-color:#ea5455" class="modal">
                 <div class="popup">
@@ -129,7 +206,40 @@
         </tr>
         <% }) %>
       </table>
+      <!-- filter error -->
+      <h3 id="any-prodyct-err" class="dn" style="text-align: center;padding-top: 60px;">sorry there are no products to this name</h3>
+      
+      <!-- Start Modal for DeleteMany -->
+        <section id="deleteManyModal" style="--modal-color:#df2e38" class="modal">
+          <div class="popup">
+              <h3>Delete Many Orders</h3>
+              <div class="content-modal">
+                  Confirm Delete This Orders
+              </div>
+              <div class="footer-modal">
+                  <button data-event="deleteMany" class="confirm-btn">Confirm</button>
+                  <div class="cancel">Cancel</div>
+              </div>
+          </div>
+      </section>
+      <!-- End Modal -->
+        
+      <!-- Start Modal for UpdateMany -->
+      <section id="updateManyModal" style="--modal-color:#33ab73" class="modal">
+        <div class="popup">
+            <h3>Orders Status</h3>
+            <div class="content-modal">
+                Confirm Update Status Of The Orders
+            </div>
+            <div class="footer-modal">
+                <!-- <a data-link="/admin/orders" class="confirm-btn" href="">Confirm</a> -->
+                  <button data-event="updateMany" class="confirm-btn">Confirm</button>
+                <div class="cancel">Cancel</div>
+            </div>
+        </div>
     </section>
+    <!-- End Modal -->
+    </form>
   </div>
 </div>
                 <!-- Start Modal -->
@@ -148,7 +258,7 @@
               <!-- End Modal -->
                                      <!--  Start Last Popup -->
                                      <% if(msg_lastPopup){ %> 
-                                      <div class="container-last-popup">
+                                      <div class="container-top-popup">
                                           <div class="last-popup">
                                               <div class="p-action"><%= msg_lastPopup %></div>
                                               <div class="icon-check">
@@ -158,7 +268,7 @@
                                       </div>
                                   <% } %> 
                                   <% if(msg_lastPopup_delete){ %> 
-                                      <div class="container-last-popup">
+                                      <div class="container-top-popup">
                                           <div class="last-popup delete">
                                               <div class="p-action"><%= msg_lastPopup_delete %></div>
                                               <div class="icon-check">

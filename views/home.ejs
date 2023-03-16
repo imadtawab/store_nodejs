@@ -1,30 +1,72 @@
 <%- include("./partials/clientPartials/top.ejs") %> 
+<input type="hidden" name="storeName" id="storeName" value="<%= storeName %>">
+    <!-- filter -->
+    <!-- <form action="/<%= //storeName %>" method="get" class="select-filter"> -->
+        <form class="select-filter">
+            <!-- <button class="show-filter" id="filter"><i class="fa-solid fa-filter"></i> Filter</button> -->
+          <!-- <h4>Orders</h4> -->
+        <section class="container-filter">
+            <select name="collection" id="searchByCollection">
+                <% ["all collection","glasses","shoes","accessories","panties","shirts"].forEach((statue) =>{ %>
+                    <!-- <div data-status="<%=// statue %>" class="option <%=// statue %>"><%=// statue %></div> -->
+                    <% if(filter.collection){%>
+                        <option <%= filter.collection == statue ? "selected" : "" %> value="<%= statue %>"><%= statue %></option>
+
+                    <% }%>
+                    <% }) %> 
+                </select>
+                <div class="search-input">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="search" name="search" value="<%= filter.title ? filter.title : "" %>" id="searchByName" placeholder="Search" >
+                    <div class="menu-search-name">
+                        <% allProducts.forEach((product) => { %>
+                            <div class="search-name dn" data-id="<%= product._id %>"><%= product.title %></div>
+                        <% }) %>
+                    </div>
+                </div>
+            </section>
+            <button class="submit-filter" id="filter"><!-- <i class="fa-solid fa-filter"></i> --> Search</button>
+
+    </form>
+    
+    <!-- filter -->
         <h1>Featured products</h1>
         <section class="cards">
             <% allProducts.forEach((product) => { %>
                 <% if(product.status == "publish"){ %>
-                    <div class="mycard">
-                        <% if(product.discount && product.discount != "0"){ %>
-                            <span class="discount">-<%= product.discount %> %</span>
-                        <%} %> 
-                        
-                        <div class="product-img">
-                            <a href="/<%= product._id %>">
-                                <img src="/uploads/<%= product.images[0] %>" alt="">
-                            </a>
-                        </div>
-                        <h4 class="product-name"><%= product.title %></h4>
-                        <div class="product-price">
-                            <div class="new-price"><%= product.price %><span>MAD</span></div>
-                            <% if(product.sub_price && product.sub_price != "0"){ %>
-                                <div class="old-price"><%= product.sub_price %> <span>MAD</span></div>
-                            <%} %> 
-                            
-                            
-                        </div>
-                        <a href="/<%= product._id %>" class="buy">View Details</a>
-                    </div>
+  
+<div class="mycard"  data-id="<%= product._id %>">                                                              
+    <% if(product.discount && product.discount != "0"){ %>                        
+        <span class="discount">-<%= product.discount %> %</span>                     
+    <%} %>                                                                        
+    <div class="heart">
+        <i class="fa-solid fa-heart"></i>
+    </div>                                                  
+    <div class="product-img">                                                     
+        <a href="/<%= storeName %>/<%= product._id %>">                                                        
+            <img src="/uploads/<%= product.images[0] %>" alt="">
+        </a>                                                                      
+    </div>                                                                        
+    <h4 class="product-name"><%= product.title %></h4>   
+    <h6 style="display: none;" class="collection"><%= product.type %></h6>                         
+    <div class="product-price">                                                      
+        <div class="new-price"><%= product.price %><span>MAD</span></div>         
+        <% if(product.sub_price && product.sub_price != "0"){ %>                  
+            <div class="old-price"><%= product.sub_price %> <span>MAD</span></div>
+        <%} %>                                                                        
+    </div>                                                                        
+    <div class="card-footer">
+        <a href="/<%= storeName %>/<%= product._id %>" class="buy">View Details</a>   
+        <div class="add-shopping-card" data-id="<%= product._id %>">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>   
+    </div>                 
+</div>    
                 <% } %>     
             <% }) %> 
         </section>
+        <h3 id="any-prodyct-err" class="dn" style="text-align: center;padding-top: 60px;">sorry there are no products to this name</h3>
+        <% if(allProducts.length == 0){ %>
+            <h2>sorry there are no products to this name</h2>
+        <% } %>
 <%- include("./partials/clientPartials/bottom.ejs") %> 

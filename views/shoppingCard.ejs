@@ -1,0 +1,156 @@
+<%- include("./partials/clientPartials/top.ejs") %>
+<link rel="stylesheet" href="/css/style.css" />
+<h1>Shopping card</h1>
+<input type="hidden" name="storeName" id="storeName" value="<%= storeName %>">
+<% if (!shoppingCard_empty) { %>
+<section class="table-container" style="max-width: 1000px;margin: auto;">
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantité</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+
+    <% shoppingCard.forEach(product => { %>
+    <tr class="row-product" data-id="<%=product._id%>">
+      <td class="product">
+        <article>
+          <a href="/<%= storeName %>/<%= product._id %>">
+            <img
+            style="max-height: 50px; max-width: 50px"
+            src="/uploads/<%=product.images[0]%>"
+            alt=""
+          />
+          </a>
+        </article>
+      </td>
+      <td class="product">
+        <article>
+          <div class="name"><%= product.title %></div>
+        </article>
+      </td>
+
+      <td class="total"><%= product.price %><span>MAD</span></td>
+
+      <td class="quantite">
+        <div class="sous-quantite">
+          <div class="minus"><i class="fa-solid fa-minus"></i></div>
+          <input
+            type="text"
+            name="quantite"
+            class="prod_quantite"
+            value="1"
+            readonly="readonly"
+          />
+          <div class="plus"><i class="fa-solid fa-plus"></i></div>
+        </div>
+      </td>
+
+      <td class="total last-total" data-price="<%= product.price %>"><%= product.price %><span>MAD</span></td>
+
+      <td class="action">
+        <div class="delete">
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </td>
+    </tr>
+    <% }) %>
+    <tr>
+      <th style="background-color: #303030; border-color: #303030" colspan="3">
+        Total
+      </th>
+      <th id="lastQantite" style="background-color: #303030; border-color: #303030">3</th>
+      <th
+        style="
+          background-color: #303030;
+          font-family: monospace;
+          font-weight: bold;
+          font-size: 16px;
+          border-color: #303030;
+        "
+        colspan="1"
+        class="total" id="lastPrice"
+      >
+        250<span style="margin-left: 4px; font-size: 13px">MAD</span>
+      </th>
+      <td class="action"  style="background-color: #303030; border-color: #303030;border-width: 2px;">
+        <!-- <div class="delete">
+          <i class="fa-solid fa-trash">all</i>
+        </div> -->
+      </td>
+    </tr>
+  </table>
+  <!-- starttttttttttttttttttttttttttttttttt -->
+
+ 
+</section>
+<main>
+  <div class="product-details">
+    <form method="POST" action="/<%= storeName %>/shoppingCard/buy" class="info">
+      <input type="hidden" name="allShoppingProducts" id="allShoppingProducts">
+      <div class="client-info">
+        <label for="fullName">
+            <div>Full Name <sup>*</sup> :</div>
+            <input type="text" name="fullName" placeholder="Full Name" id="fullName" required>
+        </label>
+        <label for="phone">
+            <div>Phone <sup>*</sup> :</div>
+            <input type="tel" name="phone" placeholder="Phone" id="phone"  required>
+        </label>
+        <label for="address">
+            <div>Address <sup>*</sup> :</div>
+            <input type="text" name="address" placeholder="Address" id="address"  required>
+        </label>
+        <label for="city">
+            <div>City <sup>*</sup> :</div>
+            <input type="text" name="city" placeholder="City" id="city"  required>
+        </label>
+        <section class="facture">
+            <!-- <article id="subTotal" class="sub-total">
+                <h5>Subtotal :</h5>
+                <div class="price"><span class="number"><%=// product.price %></span><span class="mad">MAD</span></div>
+            </article> -->
+            <article id="shipping" class="shipping">
+                <h5>Shipping :</h5>
+                <div class="price"><span class="number"><%=// product.shipping %>0</span><span class="mad">MAD</span></div>
+            </article>
+            <article id="total" class="total">
+                <h5>Total :</h5>
+                <div class="price"><span class="number"><%=// product.price %></span><span class="mad">MAD</span></div>
+                <!-- <input type="hidden" id="topTotal" name="total"> -->
+            </article>
+        </section>
+        <button type="submit">Buy now</button>
+      </form>
+    </div>
+  </div>
+</main>
+  <!-- enddddddddddddddddddddddddddddddddddd -->
+</section>
+
+<% } else { %>
+<h2 style="text-align: center; margin-top: 100px">
+  <%= shoppingCard_empty %> <a href="/<%= storeName %>">Home page</a>
+</h2>
+
+        <!--  Start Last Popup -->
+        
+        <% if(msg_lastPopup){ %> 
+          <div class="container-last-popup">
+              <div class="par-popup">
+                  <div class="last-popup">
+                      <div class="p-action"><%= msg_lastPopup %></div>
+                      <div class="icon-check">
+                          <i class="fa-solid fa-check"></i>
+                      </div>
+                  </div>
+                  <a href="/<%= storeName %>"><i class="fa-solid fa-home"></i>Home</a>
+                  <div class="cancel">Cancel</div>
+              </div>
+          </div>
+     <% } %> 
+      <!--  End Last Popup -->
+<% } %> <%- include("./partials/clientPartials/bottom.ejs") %>

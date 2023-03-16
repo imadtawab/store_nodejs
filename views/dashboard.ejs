@@ -1,5 +1,7 @@
 <%- include("./partials/adminPartials/top.ejs") %>
+
 <h1>Dashbord</h1>
+
 <div class="new-content">
   <div class="mywidget statics">
     <div style="--c: orange" class="widget">
@@ -7,37 +9,44 @@
         <h4>TOTAL ORDER</h4>
         <i class="fa-solid fa-bag-shopping"></i>
       </div>
-      <h2 class="number"><%= allOrders.length %></h2>
+      <h2 class="number" id="totalOrders">0</h2>
+      <!-- <h2 class="number" id="totalOrders"><%= allOrders.length %></h2> -->
     </div>
     <div style="--c: blue" class="widget">
       <div class="head">
         <h4>TOTAL VISITOR</h4>
-        <a href="orderdetails.html">
           <i class="fa-solid fa-eye"></i>
-        </a>
       </div>
-      <h2 class="number"><%= visitors %></h2>
+      <h2 class="number" id="totalVisitors">0</h2>
     </div>
     <div style="--c: red" class="widget">
       <div class="head">
         <h4>CONVERSION RATE</h4>
         <i class="fa-solid fa-percent"></i>
       </div>
-      <% if(visitors){ %>
-        <% let visitArr = Array.from((allOrders.length / visitors * 100).toString()) %> 
-        <h2 class="number"><%= visitArr.indexOf(".") == -1 ? visitArr.join("") : visitArr.slice(0,visitArr.indexOf(".")+3).join("") %><span>%</span></h2>
-      <% }else{ %>
-        <h2 class="number">0<span>%</span></h2>
-      <% } %> 
+        <h2 class="number"  id="convertionRate">0<span>%</span></h2>
     </div>
+    <!-- <div style="--c: red" class="widget">
+      <div class="head">
+        <h4>CONVERSION RATE</h4>
+        <i class="fa-solid fa-percent"></i>
+      </div>
+      <%// if(visitors){ %>
+        <%// let visitArr = Array.from((allOrders.length / visitors * 100).toString()) %> 
+        <h2 class="number"><%=// visitArr.indexOf(".") == -1 ? visitArr.join("") : visitArr.slice(0,visitArr.indexOf(".")+3).join("") %><span>%</span></h2>
+      <%// }else{ %>
+        <h2 class="number">0<span>%</span></h2>
+      <%// } %> 
+    </div> -->
     <div style="--c: green" class="widget">
       <div class="head">
         <h4>TOTAL REVENUE</h4>
         <i class="fa-solid fa-sack-dollar"></i>
       </div>
-      <% let total = 0 %> 
-      <% allOrders.forEach(order => total += +order.total) %> 
-      <h2 class="number"><%= total %><span>MAD</span></h2>
+      <%// let total = 0 %> 
+      <%// allOrders.forEach(order => total += +order.total) %> 
+      <!-- <h2 class="number"><%=// total %><span>MAD</span></h2> -->
+      <h2 class="number" id="totalAmount">0<span>MAD</span></h2>
     </div>
   </div>
 
@@ -63,7 +72,7 @@
             <td class="status">
               <div class="not-select <%= order.status[order.status.length-1].statue %>"><%= order.status[order.status.length-1].statue %></div>
             </td>
-            <td class="total"><%=order.total %><span>MAD</span></td>
+            <td class="total"><%= order.total %><span>MAD</span></td>
             <td class="action">
               <a href="/admin/orders/<%= order._id %> ">
                 <i class="fa-solid fa-eye"></i>
@@ -74,5 +83,40 @@
       </table>
     </section>
   </div>
+     <div class="mywidget charts-container">
+      <div class="widget order-chart">
+        <div id="orderChart">
+          <canvas></canvas>
+        </div>
+      </div>
+      <div class="widget status-chart">
+        <div id="statusChart">
+          <canvas></canvas>
+        </div>
+      </div>
+  
+    </div>
+    <div class="mywidget charts-container" style="flex-wrap: wrap-reverse;">
+      <div class="widget status-chart">
+        <div id="collectionsChart">
+          <canvas></canvas>
+        </div>
+      </div>
+      <div class="widget order-chart">
+        <div id="amountChart">
+          <canvas></canvas>
+        </div>
+      </div>
+    </div>
+    
+    <input type="hidden" id="inputForChart" value="<%= JSON.stringify(allOrders) %>">
+    <input type="hidden" id="inputForVisitors" value="<%= JSON.stringify(visitors) %>">
+    <script src="/cdn.js"></script>
+    <script src="/chart.js"></script>
+    
+  
+    
+ 
 </div>
+
 <%- include("./partials/adminPartials/bottom.ejs") %>

@@ -2,22 +2,31 @@
     <!-- form -->
     <div class="widget profile-page">
 
-        <form method="POST" action="/admin/profile/update-image" enctype="multipart/form-data" class="img-profile">
+        <form method="POST" action="/admin/profile/update-imageProfile" enctype="multipart/form-data" class="img-profile">
             <% if(user.image){ %>
                 <div class="par" id="profileImg" style="background-image: url(/uploads/<%=user.image%>)">
+                <input type="hidden" value="<%=user.image%>" name="oldProfileImage">
             <% }else{ %>
             <div class="par" id="profileImg" style="background-image: url(/images/OIP.jpg)">
             <% } %>
                 <!-- <img src="" alt="" id="profileImg"> -->
             </div>
-            <label for="changeImgProfile" class="change">+</label>
+            <% if(user.image){ %>
+                <div id="deleteImageProfile" class="close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            <!-- </form> -->
+            <% } %>
+            <label for="changeImgProfile" class="change">
+                <i class="fa-solid fa-plus"></i>
+            </label>
             <input type="file" name="image" id="changeImgProfile" class="dn"/>
         </form>
 
         <!-- .profile-page .info .box .change -->
         <div class="info">
             <h4>Information</h4>
-            <label for="userName">UserName :</label>
+            <label for="userName">User Name :</label>
             <div class="box userName">
                 <form class="par-box" method="POST" action="/admin/profile/update-username">
                     <input name="userName" type="text" id="userName" required value="<%= user.userName %>" readonly="readonly"/>
@@ -33,6 +42,22 @@
                     </div>
                 </form>
             </div>
+            <!-- <label for="userName">Store Name :</label>
+            <div class="box storeName">
+                <form class="par-box" method="POST" action="/admin/profile/update-storename">
+                    <input name="storeName" type="text" id="storeName" required value="<%= user.storeName %>" readonly="readonly"/>
+                    
+                    <div class="par-btn-change">
+                        <div class="change">change</div>
+                        <div class="close dn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <button type="submit" class="submit-btn dn">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div> -->
             <label for="email">Email :</label>
             <div class="box email">
                 <form class="par-box" method="POST" action="/admin/profile/update-email">
@@ -88,9 +113,62 @@
             <!-- <button id="submitBtn" type="submit" class="updateBtn">Update</button> -->
         </div>
     </div>
+    <div class="widget profile-page">
+        <div class="info">
+            <h4>Store Setting</h4>
+            <label for="storeName">Store Name :</label>
+            <div class="box storeName">
+                <form class="par-box" method="POST" action="/admin/profile/update-storename">
+                    <input name="storeName" type="text" id="storeName" required value="<%= user.storeName %>" readonly="readonly"/>
+                    <!--  readonly="readonly" -->
+                    <div class="par-btn-change">
+                        <div class="change">change</div>
+                        <div class="close dn">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <button type="submit" class="submit-btn dn">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <label for="">Store Logo :</label>
+            <div class="box storeLogo">
+                <form style="justify-content: space-between;" class="par-box" method="POST" enctype="multipart/form-data" action="/admin/profile/update-storeLogo">
+                    <input name="storeLogo" type="file" id="storeLogo" required value="<%=// user.storeLogo %>"/>
+                    <!--  readonly="readonly" -->
+                    <div class="logo-container">
+                        <% if(user.storeLogo){ %>
+                            <img src="/uploads/<%= user.storeLogo %>" alt="">
+                            <input type="hidden" value="<%=user.storeLogo%>" name="oldStoreLogo">
+
+                            <% }else{ %>
+                            <label class="add-logo" for="storeLogo">+ Add Logo</label>
+                            <% } %>
+                    </div>
+
+                    <div class="par-btn-change">
+                        <% if(user.storeLogo){ %>
+                                <div id="deleteLogo" class="close">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            <!-- </form> -->
+                            <% } %>
+                        <label for="storeLogo" class="change">change</label>
+                        <!-- 
+                        <button type="submit" class="submit-btn dn">
+                            <i class="fa-solid fa-check"></i>
+                        </button> -->
+                    </div>
+                </form>
+            </div>
+            
+            <!-- <button id="submitBtn" type="submit" class="updateBtn">Update</button> -->
+        </div>
+    </div>
                         <!--  Start Last Popup -->
                         <% if(msg_lastPopup){ %> 
-                            <div class="container-last-popup">
+                            <div class="container-top-popup">
                                 <div class="last-popup">
                                     <div class="p-action"><%= msg_lastPopup %></div>
                                     <div class="icon-check">
@@ -100,4 +178,16 @@
                             </div>
                         <% } %> 
                         <!--  End Last Popup -->
+                            <!--  Start Last Popup -->
+                            <% if(storeNameError){ %> 
+                                <div class="container-top-popup">
+                                    <div class="last-popup  delete">
+                                        <div class="p-action"><%= storeNameError %></div>
+                                        <div class="icon-check">
+                                            <i class="fa-solid fa-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %> 
+                            <!--  End Last Popup -->
     <%- include("./partials/adminPartials/bottom.ejs") %>

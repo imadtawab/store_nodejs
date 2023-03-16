@@ -6,6 +6,7 @@ const path = require("path")
 const adminRoute = require("./routers/adminRouter/adminRouter")
 const clientRoute = require("./routers/clientRouter/clientRouter")
 // .env
+
 require('dotenv').config()
 // helmet
 const helmet = require("helmet");
@@ -22,7 +23,6 @@ mongoose.connect(process.env.URL_DB,{useNewUrlParser:true,useUnifiedTopology:tru
     // })
 }).catch(err => console.log(err))
 
-
 // flash
 const flash = require("connect-flash")
 // use
@@ -32,13 +32,19 @@ app.use(helmet());
 // statics folder
 app.use(express.static(path.join(__dirname,"public")))
 
+app.set('trust proxy', 1) // trust first proxy
+
 app.use("/admin",adminRoute)
 app.use("/",clientRoute)
 
 app.use((req,res) => {
-    res.send("404")
+    res.send("404 !!!")
 })
+
 
 app.listen(process.env.PORT || 5555,() => {
     console.log("sucsses !!")
 })
+
+
+

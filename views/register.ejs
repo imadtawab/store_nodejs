@@ -13,6 +13,12 @@
               </div>
             </div>
             <div class="box">
+              <label for="storeName">Store Name :</label>
+              <div>
+                <input type="text" value="<%= myuser ? myuser.storeName : "" %>" name="storeName" id="storeName" required />
+              </div>
+            </div>
+            <div class="box">
               <label for="email">Email :</label>
               <div>
                 <input type="email" value="<%= myuser ? myuser.email : "" %>" name="email" id="email" required />

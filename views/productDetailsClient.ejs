@@ -1,4 +1,5 @@
 <%- include("./partials/clientPartials/top.ejs") %> 
+<input type="hidden" name="storeName" id="storeName" value="<%= storeName %>">
 <section class="product-details">
     <div class="gallery">
         <div class="main-img">
@@ -18,7 +19,7 @@
             </p>
           </section>
     </div>
-    <form method="POST" action="/<%= product._id %> " class="info">
+    <form method="POST" action="/<%= storeName %>/<%= product._id %>" class="info">
         <input type="hidden" name="productId" value="<%= product._id %>"> 
         <h4><%= product.title %></h4>
         <div class="product-price">
@@ -71,19 +72,19 @@
         <div class="client-info">
             <label for="fullName">
                 <div>Full Name <sup>*</sup> :</div>
-                <input type="text" name="fullName" placeholder="Full Name" id="fullName">
+                <input type="text" name="fullName" placeholder="Full Name" id="fullName" required>
             </label>
             <label for="phone">
                 <div>Phone <sup>*</sup> :</div>
-                <input type="tel" name="phone" placeholder="Phone" id="phone">
+                <input type="tel" name="phone" placeholder="Phone" id="phone"  required>
             </label>
             <label for="address">
                 <div>Address <sup>*</sup> :</div>
-                <input type="text" name="address" placeholder="Address" id="address">
+                <input type="text" name="address" placeholder="Address" id="address"  required>
             </label>
             <label for="city">
                 <div>City <sup>*</sup> :</div>
-                <input type="text" name="city" placeholder="City" id="city">
+                <input type="text" name="city" placeholder="City" id="city"  required>
             </label>
             <section class="facture">
                 <article id="subTotal" class="sub-total">
@@ -115,7 +116,7 @@
                                 <i class="fa-solid fa-check"></i>
                             </div>
                         </div>
-                        <a href="/"><i class="fa-solid fa-home"></i>Home</a>
+                        <a href="/<%= storeName %>"><i class="fa-solid fa-home"></i>Home</a>
                         <div class="cancel">Cancel</div>
                     </div>
                 </div>

@@ -14,17 +14,18 @@
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/style.css">
+    
 </head>
 
 <body>
     <div class="page d-flex closed-sidebar">
         <div class="sidebar bg-white">
             <i class="close-sidebar fa-solid fa-xmark"></i>
-            <h3 class="m-auto p-3 mb-5 position-relative">Elzero</h3>
+            <h3 class="m-auto p-3 mb-5 position-relative">Admin</h3>
             <ul class="list-unstyled">
                 <li class="active list-unstyled">
                     <a class="text-decoration-none fw-bold" class="text-decoration-none" href="/admin">
-                        <i class="fa-regular fa-chart-bar fa-fw"></i>
+                        <i class="fa-solid fa-house"></i>
                         <span>Dashbord</span>
                     </a>
                 </li>
@@ -52,6 +53,12 @@
                         <!-- <i class="fa-duotone fa-cubes"></i> -->
                         <i class="fa-sharp fa-solid fa-cubes"></i>
                         <span>Products</span>
+                    </a>
+                </li>
+                <li class="active list-unstyled">
+                    <a class="text-decoration-none fw-bold" class="text-decoration-none" href="/admin/statistics">
+                        <i class="fa-sharp fa-solid fa-chart-pie"></i>
+                        <span>Statistics</span>
                     </a>
                 </li>
                 <!-- <li class="list-unstyled">
@@ -89,12 +96,26 @@
                     <i class="fa-solid fa-search"></i>
                     <input type="search" name="" id="">
                 </form> -->
-                <div class="icons">
-                    <% if(user.newOrder.length > 0){ %> 
-                        <i style="--numOrder: '<%= user.newOrder.length %>'" class="fa-regular fa-bell active"></i>
-                    <% }else{ %> 
-                        <i class="fa-regular fa-bell"></i>
-                    <% } %> 
+                <div class="icons"> 
+                   <div class="container-notification" style="position: relative">
+                         <%// if(user.newOrder.length > 0){ %>
+                            <i style="--numOrder: '<%=// user.newOrder.length %>'" id="notification-icon" class="fa-regular fa-bell active"></i>
+                        <%// }else{ %> 
+                            <!-- <i class="fa-regular fa-bell"></i> -->
+                        <% //} %> 
+                        <div class="parent-notification">
+                            <%// for (let i = user.newOrder.length-1; i >= 0; i--) { %>
+                                <div class="notification">
+                                    
+                                    !:;<b><%=// user.newOrder[i].fullName %></b> à demander <b>"<%=// user.newOrder[i].products.title %>"x<%= //user.newOrder[i].quantite %></b>
+                                </div>
+                            <% //} %> 
+                        </div> 
+                    </div> 
+                    <div class="store-page-link">
+                        <div class="userName"><%= user.userName %></div>
+                        <a target="_blank" href="/<%= user.storeName %>"><i class="fa-sharp fa-solid fa-eye"></i><%=  user.storeName %></a>
+                    </div>
                     <div class="par-menu-img">
                         <!-- <img src="/images/OIP.jpg" alt=""> -->
                         <% if(user.image){ %>

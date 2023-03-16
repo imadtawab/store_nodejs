@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const allOrderSchema = new Schema({
   userID: String,
-  product: Object,
+  // product: Object,
+  products: Array,
   fullName: {
     type: String,
     required: true,

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect</title>
+</head>
+<body>
+    <input type="hidden" name="storeName" id="storeName" value="<%= storeName %>">
+    <% if(msg_forRemoveStorage){ %> 
+        <div class="container-last-popup">
+            <!-- <div class="par-popup">
+                <div class="last-popup">
+                    <div class="p-action"><%= //msg_lastPopup %></div>
+                    <div class="icon-check">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                </div>
+                <a href="/<%=// storeName %>"><i class="fa-solid fa-home"></i>Home</a>
+                <div class="cancel">Cancel</div>
+            </div> -->
+        </div>
+   <% } %> 
+    <script src="/redirectShopping.js"></script>
+</body>
+</html>

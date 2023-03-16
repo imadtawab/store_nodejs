@@ -60,10 +60,17 @@ btnModal.forEach((btn) => {
     btn.addEventListener("click",(eo_btn) => {
         console.log(eo_btn.target)
         let sectionModal = document.getElementById(eo_btn.target.dataset.modal)
+        if (eo_btn.target.parentElement.dataset.modal == "deleteManyModal") {
+            sectionModal = document.getElementById(eo_btn.target.parentElement.dataset.modal)
+        }
         console.log(sectionModal)
         sectionModal.classList.add("modal-active")
         sectionModal.querySelector(".cancel").onclick = (cancel) => {
             sectionModal.classList.remove("modal-active")
+                
+            if (document.querySelector("#defaultValue")) {
+                document.querySelector("#defaultValue").selected = true
+            }
         }
         sectionModal.querySelector(".confirm-btn").onclick = (cancel) => {
             sectionModal.classList.remove("modal-active")
@@ -157,13 +164,69 @@ selectsStatus.forEach((select) => {
 //     select.setAttribute("class",select.value)
 // })
 
+// checkbox in table
+
+let parentCheckbox = document.getElementById("parentCheck")
+let allCheckbox = document.querySelectorAll(".checkbox input")
+let tableForm = document.getElementById("tableForm")
+let deleteMany = document.getElementById("deleteMany")
+let updateMany = document.getElementById("updateMany")
+if (parentCheckbox) {
+    parentCheckbox.onchange = (eo) => {
+        if (eo.target.checked) {
+         allCheckbox.forEach(checkbox => {
+             checkbox.checked = true
+         });
+        }else{
+         allCheckbox.forEach(checkbox => {
+             checkbox.checked = false
+         });
+        }
+     }
+     tableForm.onchange = (eo) => {
+         let result = []
+         allCheckbox.forEach(checkbox => {
+             if(checkbox.checked){
+                 result.push(checkbox)
+             }
+         })
+         if (result.length == 0) {
+             checkDisabled(true)
+         }else{
+             checkDisabled(false)
+         }
+     }
+     tableForm.onsubmit = (eo) => {
+         eo.preventDefault()
+         document.getElementById("event").value = document.activeElement.dataset.event
+         if(document.activeElement.dataset.event == "updateMany"){
+             document.getElementById("thisStatusForMany").value = document.querySelector("#updateMany select").value
+         }
+         eo.target.submit()
+     }
+     updateMany.querySelector("select").onchange = () => {
+         updateMany.click()
+     }
+}
+
+function checkDisabled(event) {
+    if (event) {
+        updateMany.setAttribute("disabled",true)
+        updateMany.querySelector("select").setAttribute("disabled",true)
+        deleteMany.setAttribute("disabled",true)
+    } else {
+        updateMany.removeAttribute("disabled")
+        updateMany.querySelector("select").removeAttribute("disabled")
+        deleteMany.removeAttribute("disabled")
+    }
+}
+
 
 
 
 
 // onOff
 let onOff = document.querySelectorAll(".onOff")
-let aa
 onOff.forEach((item) => {
     item.onclick = (eo) => {
         eo.target.classList.toggle("on")
@@ -224,7 +287,6 @@ function deleteImgs() {
                     // delete_image
                     deleteImg.forEach((item) => {
                         item.onclick=function(eo){
-                            console.log(aaaa=eo.target)
                             eo.target.parentElement.parentElement.remove()
                         }
                     })
@@ -288,6 +350,18 @@ function check_validatePassword() {
         return false
     }
 }
+if (location.pathname.startsWith("/admin/login/forgot-password")) {
+    confirmPassword.oninput = () => {
+        check_validatePassword()
+        check_confirmPassword()
+    }
+    password.oninput = () => {
+        check_validatePassword()
+        if(confirmPassword.value != ""){
+            check_confirmPassword()
+        }
+    }
+}
 if(document.querySelector(".register") && location.pathname == "/admin/register"){
 
 
@@ -316,12 +390,19 @@ if(document.querySelector(".register") && location.pathname == "/admin/register"
 // img
 const ProfileInputImg = document.querySelector("#changeImgProfile");
 const ProfileImg = document.querySelector("#profileImg");
+const deleteProfilImage = document.querySelector("#deleteImageProfile");
+if (deleteProfilImage) {
+    deleteProfilImage.onclick = (eo) => {
+        eo.target.parentElement.parentElement.action = "/admin/profile/delete-imageProfile"
+        eo.target.parentElement.parentElement.submit()
+    }
+}
 function defaultBtnActive() {
     ProfileInputImg.click();
 }
 
 if(ProfileInputImg){
-    changeImgProfile.oninput = (eo) => {
+    ProfileInputImg.oninput = (eo) => {
         eo.target.parentElement.submit()
     }
     ProfileInputImg.addEventListener("change", function () {
@@ -338,6 +419,47 @@ if(ProfileInputImg){
       });
 }
 
+// Profile IMAGE
+// img
+ // input file
+const storeLogo = document.querySelector("#storeLogo");
+const deleteLogo = document.querySelector("#deleteLogo");
+// div for show
+const addLogo = document.querySelector(".box.storeLogo form .add-logo");
+function defaultBtnActive() {
+    storeLogo.click();
+}
+
+if (deleteLogo) {
+    deleteLogo.onclick = (eo) => {
+        eo.target.parentElement.parentElement.parentElement.action = "/admin/profile/delete-storeLogo"
+        eo.target.parentElement.parentElement.parentElement.submit()
+    }
+}
+
+if(storeLogo){
+    storeLogo.oninput = (eo) => {
+        eo.target.parentElement.submit()
+    }
+    // storeLogo.addEventListener("change", function () {
+    //     const file = this.files[0];
+    //     if (file) {
+    //       const reader = new FileReader();
+    //       reader.onload = function () {
+    //         const result = reader.result;
+    //         // *solution*
+    //         // addLogo.style.backgroundImage =  `url(${result})`;
+    //         // addLogo.innerHTML = `<img src="${result}"/>`
+    //         let nn = document.createElement("img")
+    //         nn.setAttribute("src",result)
+    //         addLogo.parentElement.prepend(nn)
+    //         addLogo.remove()
+    //       };
+    //       reader.readAsDataURL(file);
+    //     }
+    //   });
+}
+
 // passError = false,
 // ConPassError = false,
 // emailError = false
@@ -345,9 +467,11 @@ if(ProfileInputImg){
 
 
 
+
 let next = true
 // Profile Change
 let userName_change = document.querySelector(".profile-page .info .userName .change")
+let storeName_change = document.querySelector(".profile-page .info .storeName .change")
 let email_change = document.querySelector(".profile-page .info .email .change")
 let password_change = document.querySelector(".profile-page .info .password .change")
 let confirmPassword_change = document.querySelector(".profile-page .info .confirmPassword .change")
@@ -356,111 +480,13 @@ let changeInfoBtn = document.querySelectorAll(".profile-page .info .par-box .cha
 
 if(document.querySelector(".profile-page")){
     let defaultValue_userName = document.querySelector(".profile-page .info .userName input").value
+    let defaultValue_storeName = document.querySelector(".profile-page .info .storeName input").value
 let defaultValue_email = document.querySelector(".profile-page .info .email input").value
     userName_change.onclick = (change) => {
-            resetChange(change,defaultValue_userName)
-            // changeInfoBtn.forEach((btn) => {
-            //     btn.onclick = (eo) => {
-            //         changeFocus(change)
-            //         console.log("email__");
-            //     }
-            // })
-        
-    //     next = false
-    //     change.target.parentElement.parentElement.querySelector("input").oninput = (eo) => {
-    //         if (eo.target.value.length < 3) {
-    //             next = false
-    //         } else {
-    //             next = true
-    //         }
-    //         console.log(next)
-    //     }
-        
-    // }
-    // email_change.onclick = (change) => {
-    //     if(next){
-    //         changeFocus(change)
-    //         // changeInfoBtn.forEach((btn) => {
-    //         //     btn.onclick = (eo) => {
-    //         //         changeFocus(change)
-    //         //         console.log("email__");
-    //         //     }
-    //         // })
-    //     }
-        
-    //     next = false
-    //     change.target.parentElement.querySelector("input").oninput = () => {
-    //         check_validateEmail()
-    //         if (emailError) {
-    //             next = false
-    //         } else {
-    //             next = true
-    //         }
-    //         console.log(next)
-    //     }
-        
-    // }
-    
-    // password_change.onclick = (change) => {
-    //     console.log("pass")
-    //     if(next){
-    //         changeFocus(change)
-    //         confirmPassword_change.parentElement.querySelector("input").readOnly = false
-    //         // changeInfoBtn.forEach((btn) => {
-    //         //     btn.onclick = (eo) => {
-    //         //         changeFocus(change)
-    //         //         console.log("pass___");
-    
-    //         //     }
-    //         // })
-    //         console.log("pass_");
-    //     }
-        
-    //     next = false
-        // change.target.parentElement.querySelector("input").oninput = () => {
-        //     passError = true
-        //     ConPassError = true
-        //     check_validatePassword()
-        //     check_confirmPassword()
-        //     if (passError && ConPassError) {
-        //         next = false
-        //     } else {
-        //         next = true
-        //     }
-        //     console.log(next)
-        // }
-        // confirmPassword_change.parentElement.querySelector("input").oninput = () => {
-        //     passError = true
-        //     ConPassError = true
-        //     check_validatePassword()            
-        //     check_confirmPassword()
-        //     if (passError || ConPassError) {
-        //         next = false
-        //     }
-        //      if(!passError && !ConPassError){
-        //         next = true
-        //     }
-        //     console.log(next)
-        // }
-        
-    // }
-    
-    // function changeFocus(change) {
-    //     changeInfoBtn.forEach((btn) => {
-    //         btn.parentElement.parentElement.querySelector("input").setAttribute("readonly","readonly")
-    //     })
-    //     change.target.parentElement.parentElement.querySelector("input").readOnly = false
-    //     change.target.parentElement.parentElement.querySelector("input").focus()
-    // }
-
-    // document.querySelector(".profile-page").onsubmit = () => {
-    //     if (passError,ConPassError,emailError) {
-    //         return false
-    //     }else{
-
-    //         return true
-    //     }
-    // }
+        resetChange(change,defaultValue_userName)
+    }    
+    storeName_change.onclick = (change) => {
+        resetChange(change,defaultValue_storeName)
     }
     email_change.onclick = (change) => {
         resetChange(change,defaultValue_email,check_validateEmail)
@@ -643,121 +669,369 @@ function resetChange(change,defaultValue,check_validation,second_check) {
 //     }
 }
 
-
-// function ckeckProfileValidation(change) {
-//     if (change.target.parentElement.querySelector("input") == document.getElementById("email")) {
-//         email.oninput = (params) => {
-//             check_validateEmail()
-//         }
-//     }else if (change.target.parentElement.querySelector("input") == document.getElementById("password")) {
-//         password.oninput = (params) => {
-//             check_validatePassword()
-//         }
-//     }
-//     if(!emailError){
-//         changeInfoBtn.forEach((btn) => {
-//             btn.parentElement.querySelector("input").setAttribute("readonly","readonly")
-//         })
-//         email.readOnly = false
-//         email.focus()
-//     }
-
-//     // if(!passError){
-//     //     changeInfoBtn.forEach((btn) => {
-//     //         btn.parentElement.querySelector("input").setAttribute("readonly","readonly")
-//     //     })
-//     //     password.readOnly = false
-//     //     password.focus()
-//     // }
-//     // if(!ConPassError){
-//     //     changeInfoBtn.forEach((btn) => {
-//     //         btn.parentElement.querySelector("input").setAttribute("readonly","readonly")
-//     //     })
-//     //     confirmPassword.readOnly = false
-//     //     confirmPassword.focus()
-//     // }
-// }
-
+// filter product
 let filterBtn = document.getElementById("filter"),
     selectFilter = document.querySelector(".select-filter"),
     searchByName = document.querySelector(".select-filter #searchByName"),
     searchByCollection = document.querySelector(".select-filter #searchByCollection"),
-    searchByStatus = document.querySelector(".select-filter #searchByStatus")
-let productStatus = document.querySelectorAll(".status .select"),
-    productCollection = document.querySelectorAll(".collection"),
-    productName = document.querySelectorAll(".product .name")
-    rowProdcut = document.querySelectorAll(".row-product")
+    searchByStatus = document.querySelector(".select-filter #searchByStatus"),
+    // date
+    from_searchByDate = document.querySelector(".select-filter #from_searchByDate"),
+    at_searchByDate = document.querySelector(".select-filter #at_searchByDate"),
+    // menu search by name
+    AllSearchName = document.querySelectorAll(".menu-search-name .search-name")
+
+let productStatus = document.querySelectorAll(".row-product .status .select"),
+    productCollection = document.querySelectorAll(".row-product .all-collection"),
+    productName = document.querySelectorAll(".row-product .product .all-name"),
+    productDate = document.querySelectorAll(".row-product .date"),
+    rowProdcut = document.querySelectorAll(".row-product");
+
+ 
+   
+    // click in name for search
+    AllSearchName.forEach((name) => {
+        name.onclick = (eo) => {
+          searchByName.value = eo.target.innerText
+        //   functionForFilterSearch()
+          AllSearchName.forEach((name) => {
+            name.classList.add("dn")
+        })
+                      // dn menu in blur
+searchByName.onblur = () => {
+    AllSearchName.forEach((name) => {
+        name.classList.add("dn")
+    })
+  }
+        }
+      })
+    // click in name for search
 if (filterBtn) {
+    if (sessionStorage.getItem("active-filter") == "true") {
+        selectFilter.classList.add("active-filter")
+    }
     filterBtn.onclick = () => {
         selectFilter.classList.toggle("active-filter")
+
+        if (sessionStorage.getItem("active-filter") == "true") {
+        sessionStorage.setItem("active-filter","false")
+        } else {
+        sessionStorage.setItem("active-filter","true")
+        }
     }
     selectFilter.oninput = () => {
+        // ## menuSearch
+        AllSearchName.forEach((name) => {
+            name.classList.add("dn")
+        })
         productStatus.forEach((product) => {
+            product.parentElement.parentElement.classList.remove("NotValidStatus")
+            product.parentElement.parentElement.classList.remove("dn")
             if(searchByStatus.value == "all"){
                 product.parentElement.parentElement.classList.remove("NotValidStatus")
             }else{
-                if(product.classList.contains(searchByStatus.value)){
+                if(product.dataset.status == searchByStatus.value){
+                    // if(product.classList.contains(searchByStatus.value)){
                     product.parentElement.parentElement.classList.remove("NotValidStatus")
                 }else{
                     product.parentElement.parentElement.classList.add("NotValidStatus")
                 }
             }
         })
+
         productCollection.forEach((product) => {
+            product.parentElement.parentElement.classList.remove("NotValidCollection")
+            product.parentElement.parentElement.classList.remove("dn")
+            let validCollection = false
+                product.querySelectorAll(".collection").forEach((coll) => {
+                    coll.classList.remove("bg")
+                    if (coll.innerText.toLowerCase() == searchByCollection.value) {
+                        validCollection = true
+                        coll.classList.add("bg")
+                    }                 
+                    })
             if(searchByCollection.value == "all"){
-                product.parentElement.parentElement.parentElement.classList.remove("NotValidCollection")
-                product.parentElement.classList.remove("NotValidCollection")
+                product.parentElement.parentElement.classList.remove("NotValidCollection")
             }else{
-                if(product.innerHTML == searchByCollection.value){
-                    product.parentElement.parentElement.parentElement.classList.remove("NotValidCollection")
-                    product.parentElement.classList.remove("NotValidCollection")
+                if(validCollection){
+                    product.parentElement.parentElement.classList.remove("NotValidCollection")
                 }else{
-                    product.parentElement.parentElement.parentElement.classList.add("NotValidCollection")
-                    product.parentElement.classList.add("NotValidCollection")
+                    console.log("zzzzzzz");
+                    product.parentElement.parentElement.classList.add("NotValidCollection")
+                    // product.parentElement.classList.add("NotValidCollection")
                 }
             }
         })
+        // productName.forEach((product) => {
+        //     if(searchByName.value == ""){
+        //         product.parentElement.parentElement.parentElement.classList.remove("NotValidName")
+        //     }else{
+        //         if(product.innerHTML.includes(searchByName.value)){
+        //             product.parentElement.parentElement.parentElement.classList.remove("NotValidName")
+        //         }else{
+        //             product.parentElement.parentElement.parentElement.classList.add("NotValidName")
+        //         }
+        //     }
+        // })
         productName.forEach((product) => {
+            product.parentElement.parentElement.classList.remove("NotValidName")
+            product.parentElement.parentElement.classList.remove("dn")
             if(searchByName.value == ""){
-                product.parentElement.parentElement.parentElement.classList.remove("NotValidName")
+                product.querySelectorAll(".name").forEach((name) => {
+                    name.classList.remove("bg")
+                })
+                product.parentElement.parentElement.classList.remove("NotValidName")
+                // menuSearch
+                AllSearchName.forEach((name) => {
+                    if (name.dataset.id == product.parentElement.parentElement.dataset.id) {
+                      name.classList.add("dn")
+                    }
+                  })
             }else{
-                if(product.innerHTML.includes(searchByName.value)){
-                    product.parentElement.parentElement.parentElement.classList.remove("NotValidName")
+
+                // /////////////////////////////////////////////////////////////
+                const calculateSimilarity = (str1 = '', str2 = '') => {
+                  let longer = str1;
+                  let shorter = str2;
+                  if (str1.length < str2.length) {
+                     longer = str2; shorter = str1;
+                  }
+                  let longerLength = longer.length;
+                  if (longerLength == 0) {
+                     return 1.0;
+                  }
+               return +((longerLength - matchDestructively(longer, shorter)) / parseFloat(longerLength) * 100).toFixed(2);
+               };
+               const matchDestructively = (str1 = '', str2 = '') => {
+                  str1 = str1.toLowerCase();
+                  str2 = str2.toLowerCase();
+                  let arr = new Array();
+                  for (let i = 0; i <= str1.length; i++) {
+                     let lastValue = i;
+                     for (let j = 0; j <= str2.length; j++) {
+                        if (i == 0){
+                           arr[j] = j;
+                        }else if(j > 0){
+                           let newValue = arr[j - 1];
+                           if(str1.charAt(i - 1) != str2.charAt(j - 1))
+                           newValue = Math.min(Math.min(newValue, lastValue), arr[j]) + 1;
+                           arr[j - 1] = lastValue; lastValue = newValue;
+                        }
+                     }
+                     if (i > 0) arr[str2.length] = lastValue;
+                  }
+                  return arr[str2.length];
+               };
+            //    console.log(calculateSimilarity(product.innerText,searchByName.value),product.innerText,"+",searchByName.value);
+                ////////////////////////////////////////////////////////////////
+                let validPercentage = false
+                let validIncludes = false
+                // console.log("##########################");
+                product.querySelectorAll(".name").forEach((name) => {
+                    name.classList.remove("bg")
+                    if (calculateSimilarity(name.innerText,searchByName.value) >= 30) {
+                        validPercentage = true
+                        name.classList.add("bg")
+                    }
+                    if (name.innerText.includes(searchByName.value)) {
+                        validIncludes = true
+                        name.classList.add("bg")
+                    }
+                    // console.log("% : " + calculateSimilarity(name.innerText,searchByName.value) + " => " + validPercentage);
+                    // console.log("first : " + name.innerText.includes(searchByName.value) + " => " + validIncludes);
+                    // console.log("---------------------------------");
+                })
+                // console.log("##########################");
+
+                if(validPercentage || validIncludes){
+                    // console.log(calculateSimilarity(product.innerText,searchByName.value),product.innerText,"+",searchByName.value);
+                    // console.log("******************" + product + "****************");
+                    product.parentElement.parentElement.classList.remove("NotValidName")
+                    AllSearchName.forEach((name) => {
+                        if (name.dataset.id == product.parentElement.parentElement.dataset.id) {
+                          name.classList.remove("dn")
+                        ///////////////////////////////////////////////
+                        menuSearchPosition()
+                        
+                        ///////////////////////////////////////////////
+                        }
+                      })
                 }else{
-                    product.parentElement.parentElement.parentElement.classList.add("NotValidName")
+
+                    product.parentElement.parentElement.classList.add("NotValidName")
+                    AllSearchName.forEach((name) => {
+                        if (name.dataset.id == product.parentElement.parentElement.dataset.id) {
+                          name.classList.add("dn")
+                        }
+                      })
                 }
+                 // if(product.innerHTML.includes(searchByName.value)){
+                //     product.parentElement.classList.remove("NotValidName")
+                // }else{
+                //     product.parentElement.classList.add("NotValidName")
+                // }
             }
         })
+        productDate.forEach((product) => {
+            product.parentElement.classList.remove("NotValidDate")
+            product.parentElement.classList.remove("dn")
+            let minValue = from_searchByDate.value.split("-").join(""),
+                maxValue = at_searchByDate.value.split("-").join(""),
+                constValue = product.innerText.slice(0,10).split("-").join("")
+            
+            if(!from_searchByDate.value && !at_searchByDate.value){
+                product.parentElement.classList.remove("NotValidDate")
+                console.log("not date ♥");
+
+            }else if(from_searchByDate.value && !at_searchByDate.value){
+                console.log("yes from & not at ♥");
+                if (minValue <= constValue) {
+                    product.parentElement.classList.remove("NotValidDate")
+                }else{
+                    product.parentElement.classList.add("NotValidDate")
+                }
+                
+            }else if(!from_searchByDate.value && at_searchByDate.value){
+                console.log("not from & yes at ♥");
+                if (maxValue >= constValue) {
+                    product.parentElement.classList.remove("NotValidDate")
+                }else{
+                    product.parentElement.classList.add("NotValidDate")
+                }
+                
+            }else if(from_searchByDate.value && at_searchByDate.value){
+                console.log("date ♥");
+                if (minValue <= constValue && maxValue >= constValue) {
+                    product.parentElement.classList.remove("NotValidDate")
+                }else{
+                    product.parentElement.classList.add("NotValidDate")
+                }
+                
+            }else{
+                product.parentElement.classList.add("NotValidDate")
+            }
+
+                console.log(product.innerText.slice(0,10).split("-").join("") ,  from_searchByDate.value.split("-").join("") , at_searchByDate.value.split("-").join("") );
+            //     if(product.innerText.slice(0,10) == searchByDate.value){
+            //         product.parentElement.classList.remove("NotValidDate")
+            //     }else{
+            // //         console.log("zzzzzzz");
+            //         product.parentElement.classList.add("NotValidDate")
+            // //         // product.parentElement.classList.add("NotValidCollection")
+            //     }
+
+
+
+            // if(searchByDate.value == ""){
+            //     product.parentElement.classList.remove("NotValidDate")
+            // }else{
+            //     if(product.innerText.slice(0,10) == searchByDate.value){
+            //         product.parentElement.classList.remove("NotValidDate")
+            //     }else{
+            // //         console.log("zzzzzzz");
+            //         product.parentElement.classList.add("NotValidDate")
+            // //         // product.parentElement.classList.add("NotValidCollection")
+            //     }
+            // }
+        })
+        
+        let lastValid = 0
         rowProdcut.forEach((product) => {
             if(!product.classList.contains("NotValidStatus") &&
                 !product.classList.contains("NotValidCollection") &&
-                !product.classList.contains("NotValidName")){
+                !product.classList.contains("NotValidName") &&
+                !product.classList.contains("NotValidDate")
+            ){
                 product.classList.remove("dn")
+                product.classList.remove("bg")
             }else{
                 product.classList.add("dn")
+                product.classList.add("bg")
             }
+            if (product.className != "row-product") {
+                lastValid++
+            }
+            // console.log("###################ggg");
+            // console.log(product.className , "== row-product => " , product.className == "row-product",lastValid);
+            if (lastValid == rowProdcut.length) {
+                document.getElementById("any-prodyct-err").classList.remove("dn")
+              }else{
+                document.getElementById("any-prodyct-err").classList.add("dn")
+              }
+              if (document.activeElement != searchByName) {
+                AllSearchName.forEach((name) => {
+                  name.classList.add("dn")
+              })
+              }
+
+              menuSearchPosition()
+             
+            // if (document.querySelectorAll(".row-product.NotValidName").length == rowProdcut.length) {
+            //     document.getElementById("any-prodyct-err").classList.remove("dn")
+            //   }else{
+            //     document.getElementById("any-prodyct-err").classList.add("dn")
+            //   }
         })
     }
 }
 
+function menuSearchPosition() {
+    document.querySelector(".menu-search-name").style.left = `${searchByName.getBoundingClientRect().left}px`
+document.querySelector(".menu-search-name").style.top = `${searchByName.getBoundingClientRect().bottom + 3.5}px`
+document.querySelector(".menu-search-name").style.width = `${searchByName.getBoundingClientRect().width}px`
 
+window.onscroll = () => {
+document.querySelector(".menu-search-name").style.left = `${searchByName.getBoundingClientRect().left + 2}px`
+document.querySelector(".menu-search-name").style.top = `${searchByName.getBoundingClientRect().bottom + 3.5}px`
+document.querySelector(".menu-search-name").style.width = `${searchByName.getBoundingClientRect().width}px`
 
-// menu img
+}
+}
+
+// menu img && notification
 if (document.querySelector(".par-menu-img")) {
+
     let menu = document.querySelector(".par-menu-img .menu"),
     imgMenu = document.querySelector(".par-menu-img .img")
 
+
+// imgMenu.onclick = () => {
     
-imgMenu.onclick = () => {
+
+//     document.body.onclick = (eo) => {
+//         if (eo.target != document.querySelector(".par-menu-img .menu li") && eo.target != imgMenu) {
+//             menu.classList.remove("active")
+//         }
+//     }
+//     menu.classList.toggle("active")
+// }
+
+// notification
     
-    document.body.onclick = (eo) => {
-        if (eo.target != document.querySelector(".par-menu-img .menu li") && eo.target != imgMenu) {
-            menu.classList.remove("active")
+    let notificationMenu = document.querySelector(".container-notification .parent-notification"),
+    notificationIcon = document.querySelector("#notification-icon")
+
+    
+    // notificationIcon.onclick = () => {
+        
+        
+        document.body.onclick = (eo) => {
+            if (eo.target == notificationIcon) {
+                notificationMenu.classList.toggle("active")
+            }else{
+
+                notificationMenu.classList.remove("active")
+            }
+
+            if (eo.target == imgMenu) {
+                menu.classList.toggle("active")
+            }else{
+    
+                menu.classList.remove("active")
+            }
         }
-    }
-    menu.classList.toggle("active")
 }
-}
+// }
 
 // show error
 if(document.querySelector(".show-top-error")){
@@ -765,3 +1039,4 @@ if(document.querySelector(".show-top-error")){
         document.querySelector(".show-top-error").remove()
     }, 5000);
 }
+      
