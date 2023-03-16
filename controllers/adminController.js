@@ -372,6 +372,7 @@ const admin_register_post = (req,res) => {
                     req.flash("myuser",{email:req.body.email , userName:req.body.userName , storeName:req.body.storeName})
                     res.redirect("/admin/register")
                 } else {
+                    console.log(req.rawHeaders[1]);
                     bcrypt.hash(req.body.password,10).then((hPass) => {
                         new registerAccount({
                             userName: req.body.userName,
@@ -390,7 +391,7 @@ const admin_register_post = (req,res) => {
                                                     <h1>Email for Confirmation</h1>
                                                     <h2>Hello ,</h2>
                                                     <p>For active your acount , Please click in the link</p>
-                                                    <a href="http://127.0.0.1:5555/admin/register/confirm/${activationCode}"> Click here !</a>
+                                                    <a href="http://${req.rawHeaders[1]}/admin/register/confirm/${activationCode}"> Click here !</a>
                                                 </div>`
                                         }).then((docs) => {
                                             console.log(docs,"email sended ...");
@@ -492,7 +493,7 @@ const admin_forgotPassword_post = (req,res) => {
                                         <h1>Email for forgot password</h1>
                                         <h2>Hello ,</h2>
                                         <p>For forgot your password , Please click in the link</p>
-                                        <a href="http://127.0.0.1:5555/admin/login/forgot-password/${forgotPasswordCode}"> Click here !</a>
+                                        <a href="http://${req.rawHeaders[1]}/admin/login/forgot-password/${forgotPasswordCode}"> Click here !</a>
                                     </div>`
                             }).then((docs) => {
                                 console.log(docs,"email sended ...");
